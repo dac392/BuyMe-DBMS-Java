@@ -9,7 +9,6 @@
 <body>
 	<%
 	session.invalidate();
-	/* session.getAttribute("user"); */
 	response.sendRedirect("Login.jsp");
 	 
 	%>

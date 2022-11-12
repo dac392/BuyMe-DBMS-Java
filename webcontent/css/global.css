@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
 
+/* GENERAL STYLES */
 *,
 *::before,
 *::after{
@@ -14,6 +15,7 @@ body{
 	padding: 2em;
 }
 
+/* HEADER STYLING */
 header{
 	display: flex;
 	justify-content: space-between;
@@ -50,4 +52,41 @@ header a:not(.header-title)::after{
 
 header a:not(.header-title):hover::after{
   width: 100%;
+}
+
+/* STATUS STYLING */
+.status-container{
+	display: flex;
+	justify-content: center;
+}
+
+.information{
+	display: flex;
+	flex-direction: column;
+	padding: 2em;
+	border: 3px solid black;
+	border-radius: 1em;
+}
+
+.options{
+	margin-top: 1em;
+}
+
+/* UTILITY STYLES */
+
+.button{
+	
+	text-decoration: none;
+    display: block;
+ 
+    background: #4E9CAF;
+    padding: 1em;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    
+    margin-bottom: 1em;
+    
+    cursor: pointer;
 }
