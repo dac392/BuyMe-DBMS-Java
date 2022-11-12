@@ -4,13 +4,24 @@
 <html>
    <head>
       <title>BuyMe | Log In</title>
+      <link rel="stylesheet" href="css/global.css">
+      <link rel="stylesheet" href="css/form-styles.css">
    </head>
    <body>
-   		<h1>Log In</h1>
+   <%@ include file="Components/Header.jsp" %>
+   
      <form action="LoginDetail.jsp" method="POST">
-       Username: <input type="text" name="username"/> <br/>
-       Password:<input type="password" name="password"/> <br/>
-       <input type="submit" value="Submit"/>
+     	<fieldset>
+	     	<legend><h1>Log In</h1></legend>
+	     	<label for="username">User Name:</label>
+	       	<input type="text" id="username" name="username"/> <br/>
+	       	
+	       	<label for="password">Password:</label>
+	       	<input type="password" id="password" name="password"/> <br/>
+	       	
+	       	<input type="submit" value="Submit"/>
+     	</fieldset>
+
      </form>
    </body>
 </html>

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+form{
+	display: flex;
+	justify-content: center;
+	margin-top: 2em;
+}
+
+fieldset{
+	padding: 2em;
+	border-radius: 1em;
+	border: 2px solid black;
+}
+
+input{
+	margin-bottom: 1em;
+	width: 100%;
+	padding: 1em;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+input[type=submit]{
+	background-color: inherit;
+	color: #4CAF50;
+	border: 3px solid #4CAF50;
+	transition: all ease-in-out 0.35s;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-top: 0.5em;
+	
+}
+
+input[type=submit]:hover {
+  background-color: #4CAF50;
+  color: white;
+}

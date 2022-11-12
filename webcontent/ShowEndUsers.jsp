@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/global.css">
 </head>
 <body>
+	<%@ include file="Components/Header.jsp" %>
 	<% 
 	try {
 		//Get the database connection
