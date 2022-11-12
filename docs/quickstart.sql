@@ -1,5 +1,5 @@
-CREATE SCHEMA `testing`;
-USE `testing`;
+CREATE SCHEMA `BuyMe`;
+USE `BuyMe`;
 
 CREATE TABLE `Enduser` (
 	`username` varchar(255) primary key,
