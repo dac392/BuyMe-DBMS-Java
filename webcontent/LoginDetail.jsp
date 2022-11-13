@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.buyme.*"%>
 <%@ page import ="java.io.*,java.util.*,java.sql.*"%>
 <!DOCTYPE html>
 <html>
@@ -11,12 +11,14 @@
 <body>
 	<%@ include file="Components/Header.jsp" %>
 	<%
+	//Get the database connection
+		Database db = new Database();	
+		Connection con = db.getConnection();
+	
     	String userid = request.getParameter("username");   
     	String pwd = request.getParameter("password");
-	    Class.forName("com.mysql.jdbc.Driver");
-	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "");
-	    Statement st = con.createStatement();
 	    
+    	Statement st = con.createStatement();
 	    ResultSet rs = st.executeQuery("select * from enduser where username='" + userid + "' and password='" + pwd + "'");
 	    
 	    if (rs.next()) {
