@@ -1,4 +1,3 @@
-@charset "UTF-8";
 form{
 	display: flex;
 	justify-content: center;
@@ -11,13 +10,14 @@ fieldset{
 	border: 2px solid black;
 }
 
-input{
+input:not([type=radio]){
 	margin-bottom: 1em;
 	width: 100%;
 	padding: 1em;
 	border: 1px solid black;
 	border-radius: 4px;
 }
+
 
 input[type=submit]{
 	background-color: inherit;
@@ -34,3 +34,59 @@ input[type=submit]:hover {
   background-color: #4CAF50;
   color: white;
 }
+
+
+.select-group{
+	position: relative;
+	margin-bottom: 1rem;
+}
+.option{
+	display: none;
+}
+
+.select-item{
+	display: block;
+  	padding: 1rem;
+  	font-weight: 400;
+  	background-color: #FFFFFF;
+  	color: black;
+}
+
+.select-item:hover{
+	background-color: #f2f2f2;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  padding: 4px;
+  transform: rotate(45deg);
+}
+
+.dropdown{
+	border: 1px solid #d3d9f0;
+	border-radius: .3rem;
+	width: 100%;
+	position: absolute;
+	border-top: none;
+}
+
+.trigger{
+
+	cursor: pointer;
+
+	display: flex;
+	padding: 1rem;
+	justify-content: space-between;
+	border-radius: .3rem;
+	width: 100%;
+	background-color: inherit;
+	border: 1px solid black;
+	position: relative;
+}
+
+.hidden{
+	display: none;
+}
+
+
