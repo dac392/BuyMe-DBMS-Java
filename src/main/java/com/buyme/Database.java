@@ -11,7 +11,6 @@ public class Database {
 	}
 
 	public Connection getConnection(){
-		
 		//Create a connection string
 		String connectionUrl = "jdbc:mysql://localhost:3306/BuyMe";
 		Connection connection = null;
