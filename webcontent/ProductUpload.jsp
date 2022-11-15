@@ -25,35 +25,40 @@
 	       	<label for="end-date">Closing date:</label>
 	       	<input type="date" id="end-date" name="end-date"/> <br/>
 	       	
-	       	<label for="category">Category:</label>
-	       	<input type="text" id="category" name="category"/> <br/>
+<!-- 	       	<label for="category">Category:</label>
+	       	<input type="text" id="category" name="category"/> <br/> -->
+	      
+	      <label for="category">Category</label><br>
+          <select id="category" name="category">
+            <option hidden>Select category</option>
+            <option value="tops">Tops</option>
+            <option value="bottoms">Bottoms</option>
+            <option value="shoes">Shoes</option>  
+          </select> 
 	       	
-	       	<div class="select-group">
-		       	<label for="dropdown-trigger">Sub-category</label>
-		       	<button class="trigger" id="dropdown-trigger">
-		       	    <span id="select-label">- please select one -</span>
-          			<div id="arrow" class="arrow"></div>
-		       	</button>
-		       	
-		       	<div id="dropdown" class="dropdown hidden">
-		       		<label class="select-item" for="tops">Tops</label>
-		       		<input type="radio" class="option" id="tops"  name="sub-category" value="tops">
-		       		
-		       		<label class="select-item" for="bottoms">Bottoms</label>
-		       		<input type="radio" class="option" id="bottoms" name="sub-category" value="botttoms">
-		       		
-		       		<label class="select-item" for="shoes">Shoes</label>
-		       		<input type="radio" class="option" id="shoes" name="sub-category" value="shoes">
-		       	</div>
-	       	</div>
+	      <label for="sub-category">Sub Category</label><br>
+          <select id="sub-category" name="sub-category">
+            <option hidden>Select type</option>
+            <option value="hoodie">Hoodie</option>
+            <option value="crewneck">Crewneck</option>
+            <option value="zipup">Zipup</option>  
+            <option value="fleece">Fleece</option>  
+          </select> 
 	       	
-	       	<label for="specification">Specification:</label>
-	       	<input type="text" id="specification" name="specification"/> <br/>
+	       	
+			<label for="specification">Color</label><br>
+			<select id="specification" name="specification">
+			  <option hidden>Select color</option>
+			  <option value="black">Black</option>
+			  <option value="brown">Brown</option>
+			  <option value="grey">Grey</option>  
+			  <option value="green">Green</option>  
+			</select> 
 	       	
 	       	<input type="submit" value="Submit"/>
      	</fieldset>
 	</form>
 	
-	<script type="text/javascript" src="Scripts/dropdown.js"></script>
+	<!-- <script type="text/javascript" src="Scripts/dropdown.js"></script> -->
 </body>
 </html>

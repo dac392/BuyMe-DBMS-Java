@@ -25,15 +25,15 @@
 			<div class="listing-container">
 				<fieldset>
 					<legend><%= rs.getString("specifications")+" "+rs.getString("subcategory")+" #"+rs.getString("aid")%></legend>
-					<p id="src1" class="ignore source">Assets/crewneck/black/crewneck01.png</p>
-					<p id="src2" class="ignore source">Assets/crewneck/black/crewneck02.png</p>
-					<p id="src3" class="ignore source">Assets/crewneck/black/crewneck03.png</p>
+					<p id="src1" class="ignore source"><%= rs.getString("link")%>image1.png</p>
+					<p id="src2" class="ignore source"><%= rs.getString("link")%>image3.png</p>
+					<p id="src3" class="ignore source"><%= rs.getString("link")%>image2.png</p>
 					<div class="slider">
 						<div class="slide">
 							<input type="radio" class="ignore" name="slide" id="img1" checked>
 							<input type="radio" class="ignore" name="slide" id="img2">
 							<input type="radio" class="ignore" name="slide" id="img3">
-							<img src="Assets/crewneck/black/crewneck01.png" id="frame"alt="image01">
+							<img src=<%= rs.getString("link")+"image1.png"%> id="frame"alt="image01">
 						</div>
 						<div class="navigation-manual">
 				            <label for="img1" class="manual"></label>
