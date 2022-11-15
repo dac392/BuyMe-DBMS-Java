@@ -40,6 +40,37 @@ Note that as is, the connection does not require a password meaning that to form
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "");
 ```
 
+# The state of the website so far
+
+I had some spare time so I tried to implement the product listing feature, or at least start on what it might look like, but since the next part of the project has not been released so far I took some liberties with it. This ofcourse is not the final product and instead was just a quick way to throw something up that looks and works pretty well.
+
+So far the site can only really handle
+
+1. tops/crewneck
+1. tops/hoodie
+1. tops/zipup
+1. tops/fleece
+   as I'm not sure on the specifics for the next bench mark and did not want to implement the entire system if it was wrong.
+
+For right now products are divided into
+
+1. categories
+   1. tops
+   1. bottoms
+   1. shoes
+1. subcateglries
+   1. crewneck
+   1. hoodie
+   1. zipup
+   1. fleece
+1. specifiaction
+   1. black
+   1. brown
+   1. grey
+   1. green
+
+Note that so far, users can at most list items for sale and all other functionality is yet to be implemented.
+
 ## Project flow
 
 Quick overview of files
