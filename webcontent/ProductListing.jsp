@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  import="com.buyme.*"%>
 <%@ page import ="java.io.*,java.util.*,java.sql.*"%>
 <!DOCTYPE html>
 <html>
@@ -14,8 +14,8 @@
 	
 	<%
 		String person = session.getAttribute("user").toString();
-		Class.forName("com.mysql.jdbc.Driver");
-	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "");
+		Database db = new Database();	
+		Connection con = db.getConnection();
 	    Statement st = con.createStatement();
 	    System.out.println(person);
 	    ResultSet rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.aid=(SELECT max(s.aid) FROM Sellsproduct s where username ='" +person+"');");
