@@ -6,7 +6,15 @@ An online auction system using a java based client and MySQL database.
 
 ## Current Status
 
-Thus far, I the front end works decently well with the login/logout requirements, however I used my description for the db that I had made prior to joining the group. You can find my schema under docs/ if you would like to test it out as is. I will try to update it to adhere to the schema I saw posted on canvas at a later time.
+- [x] login/logout
+- [x] List an item for sale (will probably need to come back to this one later on)
+- [x] updated schema definition found under docs/quickstart.sql
+
+Thus far, I've managed to make login/logout work successfully and since I don't think the next part of the project has been released, I've just been adding things that either might be required (to an extent) or will just make the site a little nicer.
+
+I was able to set up (more or less) the functionality for a user to list an item for sale and as an added touch, the site will display the 10 newest items listed for sale on the home page. The functionality that I added is definitely not perfect but thus far works ok-ish.
+
+Additionally, to make the site look better I added a very rudimentary image/thumbnail feature for each item. I could not wuite figure out how to allow the user to upload their own picture if they wished, so I made a table in the databse to keep track of the pictures that I have access to (found in webcontent/Assets) to choose an appropriate picture based on the category/sub-category/specification of the item being listed. I don't think this method is all that perfect and will probably need to be reworked depending on how the group decides to proceed with th project but its nice to look at for right now :)
 
 ## Set up
 
@@ -29,3 +37,46 @@ Note that as is, the connection does not require a password meaning that to form
 ```java
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "");
 ```
+
+## Project flow
+
+Quick overvire of files
+
+1. main files (usable routes):
+   1. index.jsp - home page
+   1. Login.jsp - static form for loging in
+   1. LoginDetail.jsp - makes a call to the db to check if there is a user with the information provided in the log in form
+   1. Logout.jsp - invalidates the session and redirects to the login screen
+   1. ProductUpload.jsp - static form for the ProductListing
+   1. ValidateProduct.jsp - after uploading the product, the seller is redirected here to view their new listing (somewhat of a successful upload verification)
+   1. ProductListing.jsp - inserts into the Sellsproduct table values provided in the ProductListing form as well as calls the db to find a link from the Assets table that matches the product description for thumbnail purposes
+   1. SellerListing.jsp - INCOMPLETE
+   1. Signup.jsp - register form. Does not redirect to something useful rn (i think)
+   1. Success.jsp - login successful screen
+   1. RegisterUser.jsp - inserts new user infor into the db
+   1. ShowEndUsers.jsp (Mostly for debugging) - for debugging, shows list of all current users
+1. Components (some components separated for shareability or ease of housekeeping)
+   1. ContentView.jsp - thumbnails in index.jsp
+   1. Header.jsp
+1. css
+   1. global.css (should prob be included in all main jsp files)
+   1. form-styles.css (for form styling)
+   1. listing.css (styles for a specific product overview i.e. ProductListing)
+   1. thumbnail.css (styles index.jsp's thumbnails);
+1. Assets (product images used as thumbnails to make the project look nicer)
+   1. Assets/crewneck/black
+   1. Assets/crewneck/brown
+   1. Assets/crewneck/grey
+   1. Assets/crewneck/green
+   1. Assets/hoodie/black
+   1. Assets/hoodie/brown
+   1. Assets/hoodie/grey
+   1. Assets/hoodie/green
+   1. Assets/zipup/black
+   1. Assets/zipup/brown
+   1. Assets/zipup/grey
+   1. Assets/zipup/green
+   1. Assets/fleece/black
+   1. Assets/fleece/brown
+   1. Assets/fleece/grey
+   1. Assets/fleece/green
