@@ -50,7 +50,8 @@ So far the site can only really handle
 1. tops/hoodie
 1. tops/zipup
 1. tops/fleece
-   as I'm not sure on the specifics for the next bench mark and did not want to implement the entire system if it was wrong.
+
+as I'm not sure on the specifics for the next bench mark and did not want to implement the entire system if it was wrong.
 
 For right now products are divided into
 
