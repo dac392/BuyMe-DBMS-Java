@@ -44,7 +44,7 @@
 					
 					<div class="info">
 						<p><strong>$<%= Double.parseDouble(rs.getString("amount")) %></strong></p>
-						<p>Category: <%= rs.getString("category") %></p>
+						<p>Category: <%= rs.getString("category").toUpperCase() %></p>
 						<p>Seller: <%= rs.getString("username") %></p>
 						<br>
 						<hr>
