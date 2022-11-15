@@ -26,6 +26,8 @@ Lastly, you'll need to set up the tomcat and db that it needs to connect to befo
 
 ## DB & Testing
 
+You should be able to just use the quickstart.sql script found under docs/ to help you set up the db. Note that the tb and the tables will probably change often enough as for right now they are just enough to make project work but probably not enough to meet future benchmarks.
+
 In theory, the only thing needed for the project to be set up is to make a "BuyMe" db with a single "Enduser" table in the form of
 
 | username | name     | email          | password | isstaff | isadministrative |
@@ -40,7 +42,7 @@ Note that as is, the connection does not require a password meaning that to form
 
 ## Project flow
 
-Quick overvire of files
+Quick overview of files
 
 1. main files (usable routes):
    1. index.jsp - home page
@@ -63,6 +65,9 @@ Quick overvire of files
    1. form-styles.css (for form styling)
    1. listing.css (styles for a specific product overview i.e. ProductListing)
    1. thumbnail.css (styles index.jsp's thumbnails);
+1. Scripts (js scripts to handle some front end things on the client)
+   1. dropdown.js [probably deprecated]
+   1. slider.js [image functionality]
 1. Assets (product images used as thumbnails to make the project look nicer)
    1. Assets/crewneck/black
    1. Assets/crewneck/brown
