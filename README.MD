@@ -28,9 +28,9 @@ Lastly, you'll need to set up the tomcat and db that it needs to connect to befo
 
 In theory, the only thing needed for the project to be set up is to make a "BuyMe" db with a single "Enduser" table in the form of
 
-| username | name     | email          | password | isstaff | isadministrative | username | isbuyer |
-| -------- | -------- | -------------- | -------- | ------- | ---------------- | -------- | ------- |
-| John642  | John Doe | john@gmail.com | 1234     | null    | null             | null     | null    |
+| username | name     | email          | password | isstaff | isadministrative |
+| -------- | -------- | -------------- | -------- | ------- | ---------------- |
+| John642  | John Doe | john@gmail.com | 1234     | null    | null             |
 
 Note that as is, the connection does not require a password meaning that to form a connection:
 
