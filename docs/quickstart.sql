@@ -10,3 +10,50 @@ CREATE TABLE `Enduser` (
 	`isadministrative` boolean,
 	`isbuyer` boolean
 );
+
+CREATE TABLE `BuyMe`.`Sellsproduct` (
+  `aid` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(15) NULL,
+  `minimumprice` DOUBLE NULL,
+  `amount` DOUBLE NULL,
+  `bidincrement` DOUBLE NULL,
+  `deadline` DATE NULL,
+  `category` VARCHAR(255) NULL,
+  `subcategory` VARCHAR(255) NULL,
+  `specifications` VARCHAR(255) NULL,
+  PRIMARY KEY (`aid`),
+  INDEX `username_idx` (`username` ASC) VISIBLE,
+  CONSTRAINT `username`
+    FOREIGN KEY (`username`)
+    REFERENCES `BuyMe`.`Enduser` (`username`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Assets` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `link` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `BuyMe`.`Assets` VALUES 
+(NULL, "Assets/crewneck/black/"),
+(NULL, "Assets/crewneck/brown/"),
+(NULL, "Assets/crewneck/grey/"),
+(NULL, "Assets/crewneck/green/"),
+
+(NULL, "Assets/hoodie/black/"),
+(NULL, "Assets/hoodie/brown/"),
+(NULL, "Assets/hoodie/grey/"),
+(NULL, "Assets/hoodie/green/"),
+
+(NULL, "Assets/zipup/black/"),
+(NULL, "Assets/zipup/brown/"),
+(NULL, "Assets/zipup/grey/"),
+(NULL, "Assets/zipup/green/"),
+
+(NULL, "Assets/fleece/black/"),
+(NULL, "Assets/fleece/brown/"),
+(NULL, "Assets/fleece/grey/"),
+(NULL, "Assets/fleece/green/")
+;
