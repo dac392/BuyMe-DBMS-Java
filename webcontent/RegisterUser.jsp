@@ -40,7 +40,11 @@
 			
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			con.close();
-			out.print("insert succeeded");
+			
+
+	        session.setAttribute("user", userName);
+	        session.setAttribute("user-name", userUsername);
+			response.sendRedirect("index.jsp");
 			
 			
 		} catch (Exception ex) {
