@@ -17,6 +17,7 @@
 	     <nav class="navbar">
 	     	<ul class="navbar-nav">
 	     		<li class="nav-item active"><a class="nav-link" href="ProductUpload.jsp">Sell Item</a></li>
+	     		<li class="nav-item active"><a class="nav-link" href="ShowNotifications.jsp">Notifications</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="Logout.jsp">Log out</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ShowEndUsers.jsp">Debug</a></li>
 	     		<li class="nav-item"><p><strong><%=session.getAttribute("user-name")%></strong></p></li>
