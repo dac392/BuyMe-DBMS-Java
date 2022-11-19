@@ -25,11 +25,24 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `link` VARCHAR(255) NULL,
   PRIMARY KEY (`aid`),
   INDEX `username_idx` (`username` ASC) VISIBLE,
-  CONSTRAINT `username`
+  CONSTRAINT `sp_username`
     FOREIGN KEY (`username`)
     REFERENCES `BuyMe`.`Enduser` (`username`)
     ON DELETE CASCADE
     ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Notifications` (
+	`nid` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255),
+	`description` VARCHAR(255) NULL,
+	`posttime` DATETIME,
+	PRIMARY KEY (`nid`, `username`),
+	CONSTRAINT `n_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE `BuyMe`.`Assets` (
