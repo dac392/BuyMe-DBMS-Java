@@ -26,7 +26,7 @@
 			String userPassword = request.getParameter("password");
 
 			//Make an insert statement for the Users table:
-			String insert = "INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative, isbuyer)"+ "VALUES (?, ?, ?, ?, null, null, null)";
+			String insert = "INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative)"+ "VALUES (?, ?, ?, ?, null, null)";
 			
 			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 			PreparedStatement ps = con.prepareStatement(insert);
