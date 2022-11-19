@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS `BuyMe`;
 CREATE SCHEMA `BuyMe`;
 USE `BuyMe`;
 
@@ -21,6 +22,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `category` VARCHAR(255) NULL,
   `subcategory` VARCHAR(255) NULL,
   `specifications` VARCHAR(255) NULL,
+  `link` VARCHAR(255) NULL,
   PRIMARY KEY (`aid`),
   INDEX `username_idx` (`username` ASC) VISIBLE,
   CONSTRAINT `username`
