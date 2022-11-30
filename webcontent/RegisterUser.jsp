@@ -39,7 +39,7 @@
 			ps.executeUpdate();
 			
 			//TESTING PURPOSES, mainly. keep if you feel like it idk
-			Database.sendNotif(userUsername, "Welcome to BuyMe!", con);
+			Utility.sendNotif(userUsername, "Welcome to BuyMe!", con);
 			
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			con.close();
