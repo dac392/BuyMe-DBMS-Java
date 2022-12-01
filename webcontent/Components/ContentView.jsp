@@ -1,8 +1,8 @@
-<%@ page import ="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import ="java.io.*,java.util.*,java.sql.*,com.buyme.*"%>
 
 <%
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "");
+	Database db = new Database();	
+	Connection con = db.getConnection();
 	Statement st = con.createStatement();
 	String querry = "SELECT * FROM Sellsproduct ORDER BY aid DESC LIMIT 10;";
 	ResultSet rs = st.executeQuery(querry);
