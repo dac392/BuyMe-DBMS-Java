@@ -22,6 +22,8 @@
 	    if (rs.next()) {
 	        session.setAttribute("user", userid);
 	        session.setAttribute("user-name", rs.getString("name"));
+	        session.setAttribute("user-isstaff", rs.getBoolean("isstaff"));
+	        session.setAttribute("user-isadmin", rs.getBoolean("isadministrative"));
 	        out.println("welcome " + userid);
 	        out.println("<a href='Logout.jsp'>Log out</a>");
  	        response.sendRedirect("Success.jsp");

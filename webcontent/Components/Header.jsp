@@ -16,6 +16,11 @@
 		<h1><a class="header-title" href="index.jsp">BuyMe</a></h1>
 	     <nav class="navbar">
 	     	<ul class="navbar-nav">
+	     	<% 
+	     		Object header_isadmin = session.getAttribute("user-isadmin");
+	     		if (header_isadmin != null && ((Boolean)header_isadmin).booleanValue()){ %>
+	     		<li class="nav-item active"><a class="nav-link" href="AdminPage.jsp">Admin</a></li>
+	     	<% } %>
 	     		<li class="nav-item active"><a class="nav-link" href="ProductUpload.jsp">Sell Item</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ShowNotifications.jsp">Notifications</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="Logout.jsp">Log out</a></li>

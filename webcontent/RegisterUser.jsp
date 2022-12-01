@@ -26,7 +26,7 @@
 			String userPassword = request.getParameter("password");
 
 			//Make an insert statement for the Users table:
-			String insert = "INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative, isbuyer)"+ "VALUES (?, ?, ?, ?, null, null, null)";
+			String insert = "INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative)"+ "VALUES (?, ?, ?, ?, false, false)";
 			
 			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 			PreparedStatement ps = con.prepareStatement(insert);
@@ -47,6 +47,8 @@
 
 	        session.setAttribute("user", userUsername);
 	        session.setAttribute("user-name", userName);
+	        session.setAttribute("user-isstaff", Boolean.FALSE);
+	        session.setAttribute("user-isadmin", Boolean.FALSE);
 			response.sendRedirect("index.jsp");
 			
 			

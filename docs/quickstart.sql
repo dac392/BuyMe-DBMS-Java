@@ -8,9 +8,11 @@ CREATE TABLE `Enduser` (
 	`email` varchar(255),
 	`password` varchar(255),
 	`isstaff` boolean,
-	`isadministrative` boolean,
-	`isbuyer` boolean
+	`isadministrative` boolean
 );
+
+INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative) VALUES
+	("Admin", "Admin", "admin@buyme.com", "", true, true);
 
 CREATE TABLE `BuyMe`.`Sellsproduct` (
   `aid` INT NOT NULL AUTO_INCREMENT,
