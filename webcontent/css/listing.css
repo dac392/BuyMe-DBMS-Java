@@ -13,10 +13,13 @@ fieldset{
 	display: flex;
 
 	gap: 2em;
+
 }
 
 legend{
 	font-size: 2em;
+	
+	text-transform: capitalize;
 }
 
 .ignore{

@@ -3,12 +3,10 @@
    <head>
       <title>BuyMe | Debug Navigation</title>
       <link rel="stylesheet" href="css/global.css">
+      <link rel="stylesheet" href="css/thumbnails.css">
    </head>
    <body>
    <%@ include file="Components/Header.jsp" %>
-   
-   
-   	<h2>Home</h2>
-	<p>For all your shopping needs</p>
+   <%@ include file="Components/ContentView.jsp" %>
    </body>
 </html>
