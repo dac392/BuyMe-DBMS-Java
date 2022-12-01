@@ -22,7 +22,7 @@
 	<h1>Administrator Page</h1>
 	<h2>Set User Rank</h2>
 	<form method="post" action="EditUserPermissions.jsp">
-			<label for="username">User name:</label>
+			<label for="username">Target Username:</label>
 			<input type="text" id="username" name="username" /><br/>
 			
 			<label for="isstaff">New rank:</label>
