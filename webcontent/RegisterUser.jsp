@@ -26,7 +26,7 @@
 			String userPassword = request.getParameter("password");
 
 			//Make an insert statement for the Users table:
-			String insert = "INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative)"+ "VALUES (?, ?, ?, ?, null, null)";
+			String insert = "INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative)"+ "VALUES (?, ?, ?, ?, false, false)";
 			
 			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 			PreparedStatement ps = con.prepareStatement(insert);
@@ -39,7 +39,7 @@
 			ps.executeUpdate();
 			
 			//TESTING PURPOSES, mainly. keep if you feel like it idk
-			Notifs.send(userUsername, "Welcome to BuyMe!", con);
+			Utility.sendNotif(userUsername, "Welcome to BuyMe!", con);
 			
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			con.close();
@@ -47,6 +47,8 @@
 
 	        session.setAttribute("user", userUsername);
 	        session.setAttribute("user-name", userName);
+	        session.setAttribute("user-isstaff", Boolean.FALSE);
+	        session.setAttribute("user-isadmin", Boolean.FALSE);
 			response.sendRedirect("index.jsp");
 			
 			

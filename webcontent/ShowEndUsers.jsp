@@ -31,6 +31,7 @@
 			<td>name</td>
 			<td>email</td>
 			<td>password</td>
+			<td>rank</td>
 		</tr>
 		
 		<%while(result.next()){%>
@@ -39,6 +40,18 @@
 				<td><%= result.getString("name") %></td>
 				<td><%= result.getString("email") %></td>
 				<td><%= result.getString("password") %></td>
+				<td>
+				<% 
+				String rank;
+				if (result.getBoolean("isadministrative")){
+					rank = "Admin";
+				} else if (result.getBoolean("isstaff")){
+					rank = "Customer Rep";
+				} else {
+					rank = "Regular User";
+				}
+				%>
+				<%= rank %></td>
 			</tr>
 			
 		<%

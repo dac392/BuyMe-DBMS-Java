@@ -28,8 +28,7 @@
 		//Create a SQL statement
 		Statement stmt = con.createStatement();
 
-		System.out.println(userid);
-		String str = "SELECT * FROM Notifications n WHERE n.username = \'"+userid+"\'";
+		String str = "SELECT * FROM Notifications n WHERE n.username = \'"+userid+"\' ORDER BY -n.posttime";
 		//Run the query against the database.
 		ResultSet result = stmt.executeQuery(str);
 	%>

@@ -1,13 +1,16 @@
 package com.buyme;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
-public class Notifs{
+public class Utility{
 	
-	private Notifs() {}
-	
-	public static void send(String username, String description, Connection con) {
+	private Utility(){}
+
+	public static void sendNotif(String username, String description, Connection con) {
 		try {
 			String insert = "INSERT INTO Notifications(username, description, posttime)"+ "VALUES (?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(insert);
@@ -29,5 +32,6 @@ public class Notifs{
 			e.printStackTrace();
 		}
 	}
+	
 	
 }
