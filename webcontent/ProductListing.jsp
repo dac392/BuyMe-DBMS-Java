@@ -13,8 +13,8 @@
 	<%@ include file="Components/Header.jsp" %>
 	
 	<%
-		if (request.getParameter("aid") != null){
-			System.out.println("test: " + request.getParameter("aid"));
+		if (request.getParameter("aid") == null){
+			response.sendRedirect("index.jsp");
 		}
 	
 		String aid = request.getParameter("aid").toString();
