@@ -62,10 +62,22 @@
 		
 		ps.executeUpdate();
 		
+
+	    Statement st = con.createStatement();
+	    ResultSet rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.aid=(SELECT max(s.aid) FROM Sellsproduct s where username ='" +person+"');");
+	    int newAid = -1;
+	    if (rs.next()){
+	    	newAid = rs.getInt("aid");
+	    }
+		
 		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 		con.close();
 		out.print("insert succeeded");
-		response.sendRedirect("ProductListing.jsp");
+		if (newAid != -1){
+			response.sendRedirect("ProductListing.jsp?aid="+newAid);
+		} else {
+			response.sendRedirect("ProductUpload.jsp");
+		}
 	%>
 	
 	

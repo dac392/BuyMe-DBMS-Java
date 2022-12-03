@@ -13,12 +13,15 @@
 	<%@ include file="Components/Header.jsp" %>
 	
 	<%
-		String person = session.getAttribute("user").toString();
+		if (request.getParameter("aid") != null){
+			System.out.println("test: " + request.getParameter("aid"));
+		}
+	
+		String aid = request.getParameter("aid").toString();
 		Database db = new Database();	
 		Connection con = db.getConnection();
 	    Statement st = con.createStatement();
-	    System.out.println(person);
-	    ResultSet rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.aid=(SELECT max(s.aid) FROM Sellsproduct s where username ='" +person+"');");
+	    ResultSet rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.aid="+aid+";");
 	%>
 		
 		<% if(rs.next()){%>

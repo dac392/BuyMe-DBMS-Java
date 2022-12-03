@@ -14,7 +14,7 @@
 	<div class="content-container">
 		<% while(rs.next()){ %>
 		
-			<div class="card">
+			<div class="card" onclick="location.href='ProductListing.jsp?aid='+<%= rs.getInt("aid")%>+'';">
 			  <img src=<%= rs.getString("link")+"image1.png"%> alt="Product" style="width:100%">
 			  <div class="container">
 			    <h4><b>$<%= rs.getString("amount")%></b></h4>
