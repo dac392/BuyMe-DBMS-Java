@@ -28,22 +28,22 @@
 			<div class="listing-container">
 				<fieldset>
 					<legend><%= rs.getString("color")+" "+rs.getString("subcategory")+" #"+rs.getString("aid")%></legend>
-<%-- 					<p id="src1" class="ignore source"><%= rs.getString("link")%>image1.png</p>
+ 					<p id="src1" class="ignore source"><%= rs.getString("link")%>image1.png</p>
 					<p id="src2" class="ignore source"><%= rs.getString("link")%>image3.png</p>
-					<p id="src3" class="ignore source"><%= rs.getString("link")%>image2.png</p> --%>
-<%-- 					<div class="slider">
+					<p id="src3" class="ignore source"><%= rs.getString("link")%>image2.png</p>
+ 					<div class="slider">
 						<div class="slide">
 							<input type="radio" class="ignore" name="slide" id="img1" checked>
 							<input type="radio" class="ignore" name="slide" id="img2">
-							<input type="radio" class="ignore" name="slide" id="img3">
-							<img src=<%= rs.getString("link")+"image1.png"%> id="frame"alt="image01">
+							<input type="radio" class="ignore" name="slide" id="img3">	
+							<img src=<%= rs.getString("link")+"image1.png"%> id="frame" alt="product image">
 						</div>
 						<div class="navigation-manual">
 				            <label for="img1" class="manual"></label>
 				            <label for="img2" class="manual"></label>
 				            <label for="img3" class="manual"></label>
 				        </div>
-					</div> --%>
+					</div>
 					
 					<div class="info">
 						<p><strong>$<%= Double.parseDouble(rs.getString("amount")) %></strong></p>
@@ -59,6 +59,6 @@
 				</fieldset>
 			</div>
 		<% } %>
-		<!-- <script type="text/javascript" src="Scripts/slider.js"></script> -->
+		<script type="text/javascript" src="Scripts/slider.js"></script>
 </body>
 </html>

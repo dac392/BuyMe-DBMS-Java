@@ -30,19 +30,22 @@
 		Statement stmt = con.createStatement();
 
 		//Make an insert statement for the Users table:
-		/* System.out.println("`%"+sub+"/"+specification+"%';"); */
-		/* String querry = "SELECT link FROM Assets WHERE link LIKE \"%"+sub+"/"+specification+"%\";"; */
-/* 		ResultSet result = stmt.executeQuery(querry);
+		/* System.out.println("`%"+sub+"/"+color+"%';"); */
+ 		String querry = "SELECT link FROM Assets WHERE link LIKE \"%"+sub+"/"+color+"%\";";
+ 		ResultSet result = stmt.executeQuery(querry);
 		String link = "";
 		if(result.next()){
 			link = result.getString("link");
-		} */
+		}else{
+			link = "Assets/"+sub+"/default/";
+		}
+
 		
 		
 		
 		
 		//Make an insert statement for the Users table:
-		String insert = "INSERT INTO Sellsproduct(aid, username, minimumprice, amount, bidincrement, deadline, category, subcategory, size, color)"+ "VALUES (null,?,?,?,?,?,?,?,?,?)";
+		String insert = "INSERT INTO Sellsproduct(aid, username, minimumprice, amount, bidincrement, deadline, category, subcategory, size, color, link)"+ "VALUES (null,?,?,?,?,?,?,?,?,?,?)";
 		
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = con.prepareStatement(insert);
@@ -58,6 +61,7 @@
 		ps.setString(7, sub);
 		ps.setString(8, size);
 		ps.setString(9, color);
+		ps.setString(10, link);
 		
 		
 		ps.executeUpdate();

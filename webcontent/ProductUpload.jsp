@@ -42,13 +42,13 @@
             <option category="tops" value="fleece">Fleece</option>
             
             <option category="bottoms" value="jeans">Jeans</option>
-            <option category="bottoms" value="joggers">Joggers</option>
             <option category="bottoms" value="sweatpants">Sweatpants</option>
+
             
             <option category="shoes" value="boots">Boots</option>
             <option category="shoes" value="sneakers">Sneakers</option>
-            <option category="shoes" value="Slides">Slides</option>
-            <option category="shoes" value="Slippers">Slippers</option>
+            <option category="shoes" value="slides">Slides</option>
+
           </select> 
           
           <label for="size">Size</label><br>

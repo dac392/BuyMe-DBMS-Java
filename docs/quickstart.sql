@@ -73,5 +73,15 @@ INSERT INTO `BuyMe`.`Assets` VALUES
 (NULL, "Assets/fleece/black/"),
 (NULL, "Assets/fleece/brown/"),
 (NULL, "Assets/fleece/grey/"),
-(NULL, "Assets/fleece/green/")
+(NULL, "Assets/fleece/green/"),
+
+(NULL, "Assets/jeans/black/"),
+(NULL, "Assets/jeans/blue/"),
+(NULL, "Assets/jeans/grey/"),
+
+(NULL, "Assets/sweatpants/black/"),
+(NULL, "Assets/sweatpants/blue/"),
+(NULL, "Assets/sweatpants/brown/"),
+(NULL, "Assets/sweatpants/grey/"),
+
 ;
