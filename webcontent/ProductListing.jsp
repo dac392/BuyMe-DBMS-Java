@@ -27,11 +27,11 @@
 		<% if(rs.next()){%>
 			<div class="listing-container">
 				<fieldset>
-					<legend><%= rs.getString("specifications")+" "+rs.getString("subcategory")+" #"+rs.getString("aid")%></legend>
-					<p id="src1" class="ignore source"><%= rs.getString("link")%>image1.png</p>
+					<legend><%= rs.getString("color")+" "+rs.getString("subcategory")+" #"+rs.getString("aid")%></legend>
+<%-- 					<p id="src1" class="ignore source"><%= rs.getString("link")%>image1.png</p>
 					<p id="src2" class="ignore source"><%= rs.getString("link")%>image3.png</p>
-					<p id="src3" class="ignore source"><%= rs.getString("link")%>image2.png</p>
-					<div class="slider">
+					<p id="src3" class="ignore source"><%= rs.getString("link")%>image2.png</p> --%>
+<%-- 					<div class="slider">
 						<div class="slide">
 							<input type="radio" class="ignore" name="slide" id="img1" checked>
 							<input type="radio" class="ignore" name="slide" id="img2">
@@ -43,7 +43,7 @@
 				            <label for="img2" class="manual"></label>
 				            <label for="img3" class="manual"></label>
 				        </div>
-					</div>
+					</div> --%>
 					
 					<div class="info">
 						<p><strong>$<%= Double.parseDouble(rs.getString("amount")) %></strong></p>
@@ -53,10 +53,12 @@
 						<hr>
 						<br>
 						<p>Closing date: <%= rs.getString("deadline") %></p>
+						<p>Size: <%= rs.getString("size") %></p>
+						<p>Color: <%= rs.getString("Color") %></p>
 					</div>
 				</fieldset>
 			</div>
 		<% } %>
-		<script type="text/javascript" src="Scripts/slider.js"></script>
+		<!-- <script type="text/javascript" src="Scripts/slider.js"></script> -->
 </body>
 </html>

@@ -19,7 +19,8 @@
 		String date = request.getParameter("end-date");
 		String category = request.getParameter("category");
 		String sub = request.getParameter("sub-category");
-		String specification = request.getParameter("specification");
+		String size = request.getParameter("size");
+		String color = request.getParameter("color");
 		
 		//Get the database connection
 		Database db = new Database();	
@@ -29,20 +30,19 @@
 		Statement stmt = con.createStatement();
 
 		//Make an insert statement for the Users table:
-		System.out.println("`%"+sub+"/"+specification+"%';");
-		String querry = "SELECT link FROM Assets WHERE link LIKE \"%"+sub+"/"+specification+"%\";";
-		ResultSet result = stmt.executeQuery(querry);
+		/* System.out.println("`%"+sub+"/"+specification+"%';"); */
+		/* String querry = "SELECT link FROM Assets WHERE link LIKE \"%"+sub+"/"+specification+"%\";"; */
+/* 		ResultSet result = stmt.executeQuery(querry);
 		String link = "";
 		if(result.next()){
 			link = result.getString("link");
-		}
+		} */
 		
-		System.out.println(link);
 		
 		
 		
 		//Make an insert statement for the Users table:
-		String insert = "INSERT INTO Sellsproduct(aid, username, minimumprice, amount, bidincrement, deadline, category, subcategory, specifications, link)"+ "VALUES (null,?,?,?,?,?,?,?,?,?)";
+		String insert = "INSERT INTO Sellsproduct(aid, username, minimumprice, amount, bidincrement, deadline, category, subcategory, size, color)"+ "VALUES (null,?,?,?,?,?,?,?,?,?)";
 		
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = con.prepareStatement(insert);
@@ -56,8 +56,8 @@
 		ps.setString(5, date);
 		ps.setString(6, category);
 		ps.setString(7, sub);
-		ps.setString(8, specification);
-		ps.setString(9, link);
+		ps.setString(8, size);
+		ps.setString(9, color);
 		
 		
 		ps.executeUpdate();
