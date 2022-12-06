@@ -33,7 +33,7 @@
             <option value="shoes">Shoes</option>  
           </select> 
 	       	
-	      <label for="sub-category">Sub Category</label><br>
+	      <label for="sub-category">Type</label><br>
           <select id="sub-category" name="sub-category">
             <option hidden>Select type</option>
             <option category="tops" value="hoodie">Hoodie</option>
