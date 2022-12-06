@@ -1,38 +1,39 @@
-const category = document.querySelector('#dropdown-trigger1');
-const subcategory = document.querySelector('#dropdown-trigger2');
-const specification = document.querySelector('#dropdown-trigger3');
+const category = document.getElementById("category");
+const sub = document.getElementById("sub-category");
+const size = document.getElementById("size");
 
-const dropdown1 = document.querySelector('#dropdown1');
-const dropdown2 = document.querySelector('#dropdown2');
-const dropdown3 = document.querySelector('#dropdown3');
-const options = document.querySelectorAll('.option');
-const selectLabel1 = document.querySelector('#select-label1');
-const selectLabel2 = document.querySelector('#select-label3');
-const selectLabel3 = document.querySelector('#select-label3');
+function onFirstLoad(){
+	sub.disabled = true;
+	size.disabled = true;
+	
+}
 
-function onButtonClick(e){
-	e.preventDefault();
-	console.log(e.target);
+function onCategoryChange(e){
+	const type = e.target.value;
+	sub.disabled = false;
+	size.disabled = false;
+
+	filter(sub.children, type);
+	filter(size.children, type);
+
 
 }
 
-function toggle(component){
-	component.classList.toggle('hidden');
+function filter(options, type){
+
+	for(let i = 1; i < options.length; i++){
+		if(options[i].attributes["category"].textContent === type){
+			
+			options[i].style.display = "";
+		}else{
+			options[i].style.display = "none";
+		}
+	}
 }
 
-function addEventListener(opt){
-	opt.addEventListener('click', (e)=>{
-		const labelElement = document.querySelector(`label[for="${e.target.id}"]`).innerText;
-		selectLabel.innerText = labelElement;
-		toggle();
-	})
-}
-
-category.addEventListener('click', onButtonClick);
-subcategory.addEventListener('click', onButtonClick);
-specification.addEventListener('click', onButtonClick);
-
-options.forEach((option)=>addEventListener(option));
+/* --------main------------ */
+onFirstLoad();
+category.addEventListener("change", onCategoryChange);
 
 
 
