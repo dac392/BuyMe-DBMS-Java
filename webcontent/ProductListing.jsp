@@ -55,6 +55,12 @@
 						<p>Closing date: <%= rs.getString("deadline") %></p>
 						<p>Size: <%= rs.getString("size") %></p>
 						<p>Color: <%= rs.getString("Color") %></p>
+						
+						<% if(session.getAttribute("user")==null || 
+								!rs.getString("username").equals(session.getAttribute("user").toString())){ %>
+							<a href="makeBid.jsp" class="button">Make an offer</a>
+						<% } %>
+						
 					</div>
 				</fieldset>
 			</div>
