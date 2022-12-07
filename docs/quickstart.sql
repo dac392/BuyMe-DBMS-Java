@@ -22,6 +22,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `amount` DOUBLE NULL,
   `bidincrement` DOUBLE NULL,
   `deadline` DATE NULL,
+  `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
   `subcategory` VARCHAR(255) NULL,
   `size` VARCHAR(255) NULL,
@@ -53,6 +54,42 @@ CREATE TABLE `BuyMe`.`Assets` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `link` VARCHAR(255) NULL,
   PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `BuyMe`.`Bids` (
+	`bid` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255),
+	`aid` INT,
+	`bidtime` DATETIME,
+	`isenabled` BOOLEAN,
+	PRIMARY KEY (`bid`),
+	CONSTRAINT `b_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT `b_sellsproduct`
+		FOREIGN KEY (`aid`)
+		REFERENCES `BuyMe`.`Sellsproduct`(`aid`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`WatchesAuction` (
+	`username` VARCHAR(255),
+	`aid` INT,
+	`maxoffer` DOUBLE NULL,
+	PRIMARY KEY (`username`, `aid`),
+	CONSTRAINT `w_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT `w_sellsproduct`
+		FOREIGN KEY (`aid`)
+		REFERENCES `BuyMe`.`Sellsproduct`(`aid`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 INSERT INTO `BuyMe`.`Assets` VALUES 
