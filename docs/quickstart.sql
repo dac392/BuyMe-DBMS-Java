@@ -60,6 +60,7 @@ CREATE TABLE `BuyMe`.`Bids` (
 	`bid` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255),
 	`aid` INT,
+	`bidvalue` DOUBLE NULL,
 	`bidtime` DATETIME,
 	`isenabled` BOOLEAN,
 	PRIMARY KEY (`bid`),
