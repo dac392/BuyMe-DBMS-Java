@@ -80,6 +80,7 @@ CREATE TABLE `BuyMe`.`WatchesAuction` (
 	`username` VARCHAR(255),
 	`aid` INT,
 	`maxoffer` DOUBLE NULL,
+	`isenabled` BOOLEAN,
 	PRIMARY KEY (`username`, `aid`),
 	CONSTRAINT `w_username`
 		FOREIGN KEY (`username`)
