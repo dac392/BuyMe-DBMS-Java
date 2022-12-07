@@ -90,3 +90,40 @@ header a:not(.header-title):hover::after{
     
     cursor: pointer;
 }
+
+/* SEARCH STYLES */
+.search-bar{
+	display:flex;
+	justify-content:center;
+}
+
+.search-bar input{
+  width: 50%;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid rgb(30, 144, 255);
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.search-bar a {
+  cursor: pointer;
+  width: 55px;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid #1e90ff;
+  border-left: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #1e90ff;
+  color: #fff;
+}
+
+.search-bar a img{
+	width: 25px;
+	height: 2em;
+}
+
+@media screen and (max-width: 700px){
+	.search-bar input{
+		width: 100%;
+	}
+}

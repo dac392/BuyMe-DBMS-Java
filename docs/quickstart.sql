@@ -122,6 +122,6 @@ INSERT INTO `BuyMe`.`Assets` VALUES
 (NULL, "Assets/sweatpants/black/"),
 (NULL, "Assets/sweatpants/blue/"),
 (NULL, "Assets/sweatpants/brown/"),
-(NULL, "Assets/sweatpants/grey/"),
+(NULL, "Assets/sweatpants/grey/")
 
 ;
