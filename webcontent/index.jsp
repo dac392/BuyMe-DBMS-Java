@@ -7,6 +7,7 @@
    </head>
    <body>
    <%@ include file="Components/Header.jsp" %>
+   <%@ include file="Components/Search.jsp" %>
    <%@ include file="Components/ContentView.jsp" %>
    </body>
 </html>
