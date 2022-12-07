@@ -13,6 +13,9 @@
 	<form method="post" action="ValidateProduct.jsp">
 		<fieldset>
 	     	<legend><h1>List an Item</h1></legend>
+	     	<label for="auction-name">Product Title:</label>
+	       	<input type="text" id="auction-name" name="auction-name"/> <br/>
+	     	
 	     	<label for="min-price">Minimum Price:</label>
 	       	<input type="text" id="min-price" name="min-price"/> <br/>
 	       	

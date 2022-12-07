@@ -13,9 +13,7 @@
 	<div class="content-container">
 		<% while(rs.next()){ %>
 			<%
-				String color = rs.getString("color");
-				String sub = rs.getString("subcategory");
-				String title = color+" "+sub;
+				String title = rs.getString("auctionname");
 			%>
 			<div class="card" onclick="location.href='ProductListing.jsp?aid='+<%= rs.getInt("aid")%>+'';">
 			  <img src=<%= rs.getString("link")+"image1.png"%> alt="Product" style="width:100%">

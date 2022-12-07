@@ -13,6 +13,7 @@
 	<% 
 		//Get parameters from the HTML form
 		String person = session.getAttribute("user").toString();
+		String auctionname = request.getParameter("auction-name");
 		float minimum = Float.parseFloat(request.getParameter("min-price")); 
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		float increment = Float.parseFloat(request.getParameter("bid-increment"));
@@ -45,23 +46,24 @@
 		
 		
 		//Make an insert statement for the Users table:
-		String insert = "INSERT INTO Sellsproduct(aid, username, minimumprice, amount, bidincrement, deadline, category, subcategory, size, color, link)"+ "VALUES (null,?,?,?,?,?,?,?,?,?,?)";
+		String insert = "INSERT INTO Sellsproduct(aid, auctionname, username, minimumprice, amount, bidincrement, deadline, category, subcategory, size, color, link)"+ "VALUES (null,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = con.prepareStatement(insert);
 		
 		//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
 		
-		ps.setString(1, person);
-		ps.setString(2, minimum+"");
-		ps.setString(3, amount+"");
-		ps.setString(4, increment+"");
-		ps.setString(5, date);
-		ps.setString(6, category);
-		ps.setString(7, sub);
-		ps.setString(8, size);
-		ps.setString(9, color);
-		ps.setString(10, link);
+		ps.setString(1, auctionname);
+		ps.setString(2, person);
+		ps.setString(3, minimum+"");
+		ps.setString(4, amount+"");
+		ps.setString(5, increment+"");
+		ps.setString(6, date);
+		ps.setString(7, category);
+		ps.setString(8, sub);
+		ps.setString(9, size);
+		ps.setString(10, color);
+		ps.setString(11, link);
 		
 		
 		ps.executeUpdate();

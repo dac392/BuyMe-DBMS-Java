@@ -27,7 +27,7 @@
 		<% if(rs.next()){%>
 			<div class="listing-container">
 				<fieldset>
-					<legend><%= rs.getString("color")+" "+rs.getString("subcategory")+" #"+rs.getString("aid")%></legend>
+					<legend><%= rs.getString("auctionname")%></legend>
  					<p id="src1" class="ignore source"><%= rs.getString("link")%>image1.png</p>
 					<p id="src2" class="ignore source"><%= rs.getString("link")%>image3.png</p>
 					<p id="src3" class="ignore source"><%= rs.getString("link")%>image2.png</p>
@@ -46,6 +46,7 @@
 					</div>
 					
 					<div class="info">
+						<p><small><%= rs.getString("color")+" "+rs.getString("subcategory")%></small></p>
 						<p><strong>$<%= Double.parseDouble(rs.getString("amount")) %></strong></p>
 						<p>Category: <%= rs.getString("category").toUpperCase() %></p>
 						<p>Seller: <%= rs.getString("username") %></p>

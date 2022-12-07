@@ -16,6 +16,7 @@ INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative) 
 
 CREATE TABLE `BuyMe`.`Sellsproduct` (
   `aid` INT NOT NULL AUTO_INCREMENT,
+  `auctionname` VARCHAR(255) NULL,
   `username` VARCHAR(15) NULL,
   `minimumprice` DOUBLE NULL,
   `amount` DOUBLE NULL,
