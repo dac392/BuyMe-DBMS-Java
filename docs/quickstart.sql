@@ -24,8 +24,6 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `deadline` DATE NULL,
   `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
-  `subcategory` VARCHAR(255) NULL,
-  `size` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,
   `link` VARCHAR(255) NULL,
   PRIMARY KEY (`aid`),
