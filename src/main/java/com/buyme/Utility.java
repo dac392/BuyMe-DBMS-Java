@@ -33,5 +33,37 @@ public class Utility{
 		}
 	}
 	
+	public static int topSizeToNum(String input) {
+		switch(input) {
+		case "XS":
+			return -2;
+		case "S":
+			return -1;
+		case "M":
+			return 0;
+		case "L":
+			return 1;
+		case "XL":
+			return 2;
+		}
+		return 0;
+	}
+	
+	public static String numToTopSize(int input) {
+		switch(input) {
+		case -2:
+			return "XS";
+		case -1:
+			return "S";
+		case 0:
+			return "M";
+		case 1:
+			return "L";
+		case 2:
+			return "XL";
+		}
+		return "?";
+	}
+	
 	
 }

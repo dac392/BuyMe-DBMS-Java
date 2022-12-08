@@ -22,6 +22,11 @@
     		} else {
     			document.getElementById("bottoms").style.display = 'none';
     		}
+    		if (category === "shoes"){
+    			document.getElementById("shoes").style.display = 'block';
+    		} else {
+    			document.getElementById("shoes").style.display = 'none';
+    		}
     		
     	}
     </script>
@@ -112,15 +117,15 @@
 	          <label for="s-size">Size</label><br>
 	          <select id="s-size" name="s-size">
 	          	<option >Select size</option>
-	          	<option value="M4/W6">M4/W6</option>
-	          	<option value="M5/W7">M5/W7</option>
-	          	<option value="M6/W8">M6/W8</option>
-	          	<option value="M7/W9">M7/W9</option>
-	          	<option value="M8/W10">M8/W10</option>
-	          	<option value="M9/W11">M9/W11</option>
-	          	<option value="M10/W12">M10/W12</option>
-	          	<option value="M11/W13">M11/W13</option>
-	          	<option value="M12/W14">M12/W14</option>
+	          	<option value="4">M4/W6</option>
+	          	<option value="5">M5/W7</option>
+	          	<option value="6">M6/W8</option>
+	          	<option value="7">M7/W9</option>
+	          	<option value="8">M8/W10</option>
+	          	<option value="9">M9/W11</option>
+	          	<option value="10">M10/W12</option>
+	          	<option value="11">M11/W13</option>
+	          	<option value="12">M12/W14</option>
 	          </select>
           </div>
 		<label for="color">Color</label><br>
