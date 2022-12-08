@@ -12,16 +12,26 @@
 <body>
 	<% 
 		//Get parameters from the HTML form
-		String person = session.getAttribute("user").toString();
-		String auctionname = request.getParameter("auction-name");
-		float minimum = Float.parseFloat(request.getParameter("min-price")); 
-		float amount = Float.parseFloat(request.getParameter("amount"));
-		float increment = Float.parseFloat(request.getParameter("bid-increment"));
-		String date = request.getParameter("end-date");
-		String category = request.getParameter("category");
+		String person, auctionname, date, category;
+		float minimum, amount, increment;
+		
+		try {
+			person = session.getAttribute("user").toString();
+			auctionname = request.getParameter("auction-name");
+			minimum = Float.parseFloat(request.getParameter("min-price")); 
+			amount = Float.parseFloat(request.getParameter("amount"));
+			increment = Float.parseFloat(request.getParameter("bid-increment"));
+			date = request.getParameter("end-date");
+			category = request.getParameter("category");
+		
+		} catch (Exception e){
+			response.sendRedirect("ProductUpload.jsp");
+			return;
+		}
+		
 		String sub = request.getParameter("sub-category");
 		String size = request.getParameter("size");
-		String color = request.getParameter("color");
+		String color = request.getParameter("color").toLowerCase();
 		
 		//Get the database connection
 		Database db = new Database();	

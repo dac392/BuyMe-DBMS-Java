@@ -37,6 +37,43 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE `BuyMe`.`Tops` (
+  `aid` INT,
+  `subcategory` VARCHAR(255) NULL,
+  `size` INT,
+  PRIMARY KEY (`aid`),
+  CONSTRAINT `pt_aid`
+    FOREIGN KEY (`aid`)
+    REFERENCES `BuyMe`.`Sellsproduct` (`aid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Bottoms` (
+  `aid` INT,
+  `subcategory` VARCHAR(255) NULL,
+  `size1` VARCHAR(5) NULL,
+  `size2` VARCHAR(5) NULL,
+  PRIMARY KEY (`aid`),
+  CONSTRAINT `pb_aid`
+    FOREIGN KEY (`aid`)
+    REFERENCES `BuyMe`.`Sellsproduct` (`aid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Shoes` (
+  `aid` INT,
+  `subcategory` VARCHAR(255) NULL,
+  `msize` INT,
+  PRIMARY KEY (`aid`),
+  CONSTRAINT `ps_aid`
+    FOREIGN KEY (`aid`)
+    REFERENCES `BuyMe`.`Sellsproduct` (`aid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
 CREATE TABLE `BuyMe`.`Notifications` (
 	`nid` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255),
