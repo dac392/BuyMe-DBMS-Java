@@ -9,8 +9,28 @@
 </head>
 <body>
 	<%@ include file="Components/Header.jsp" %>
-	
-	<form method="post" action="ValidateProduct.jsp">
+	<script>
+    	function updateForm(category){
+    		console.log(category);
+    		if (category === "tops"){
+    			document.getElementById("tops").style.display = 'block';
+    		} else {
+    			document.getElementById("tops").style.display = 'none';
+    		}
+    		if (category === "bottoms"){
+    			document.getElementById("bottoms").style.display = 'block';
+    		} else {
+    			document.getElementById("bottoms").style.display = 'none';
+    		}
+    		if (category === "shoes"){
+    			document.getElementById("shoes").style.display = 'block';
+    		} else {
+    			document.getElementById("shoes").style.display = 'none';
+    		}
+    		
+    	}
+    </script>
+	<form method="post" action="ValidateProduct.jsp" id="optionForm">
 		<fieldset>
 	     	<legend><h1>List an Item</h1></legend>
 	     	<label for="auction-name">Product Title:</label>
@@ -29,82 +49,96 @@
 	       	<input type="date" id="end-date" name="end-date"/> <br/>
 	      
 	      <label for="category">Category</label><br>
-          <select id="category" name="category">
-            <option hidden>Select category</option>
+          <select id="category" name="category" onchange="updateForm(this.value)">
+            <option>Select category</option>
             <option value="tops">Tops</option>
             <option value="bottoms">Bottoms</option>
             <option value="shoes">Shoes</option>  
           </select> 
 	       	
-	      <label for="sub-category">Type</label><br>
-          <select id="sub-category" name="sub-category">
-            <option hidden>Select type</option>
-            <option category="tops" value="hoodie">Hoodie</option>
-            <option category="tops" value="crewneck">Crewneck</option>
-            <option category="tops" value="zipup">Zipup</option>  
-            <option category="tops" value="fleece">Fleece</option>
-            
-            <option category="bottoms" value="jeans">Jeans</option>
-            <option category="bottoms" value="sweatpants">Sweatpants</option>
-
-            
-            <option category="shoes" value="boots">Boots</option>
-            <option category="shoes" value="sneakers">Sneakers</option>
-            <option category="shoes" value="slides">Slides</option>
-
-          </select> 
-          
-          <label for="size">Size</label><br>
-          <select id="size" name="size">
-          	<option hidden>Select size</option>
-          	<option category="tops" value="XS">XS</option>
-          	<option category="tops" value="S">S</option>
-          	<option category="tops" value="M">M</option>
-          	<option category="tops" value="L">L</option>
-          	<option category="tops" value="XL">XL</option>
-          	
-          	<option category="bottoms" value="26X28">26 X 28</option>
-          	<option category="bottoms" value="26X30">26 X 30</option>
-          	<option category="bottoms" value="28X28">28 X 28</option>
-          	<option category="bottoms" value="28X30">28 X 30</option>
-          	<option category="bottoms" value="28X32">28 X 32</option>
-          	<option category="bottoms" value="28X34">28 X 34</option>
-          	<option category="bottoms" value="29X30">29 X 30</option>
-          	<option category="bottoms" value="29X32">29 X 32</option>
-          	<option category="bottoms" value="29X34">29 X 34</option>
-          	<option category="bottoms" value="30X30">30 X 30</option>
-          	<option category="bottoms" value="30X32">30 X 32</option>
-          	<option category="bottoms" value="30X34">30 X 34</option>
-          	<option category="bottoms" value="30X36">30 X 36</option>
-          	<option category="bottoms" value="31X30">31 X 30</option>
-          	<option category="bottoms" value="31X32">31 X 32</option>
-          	<option category="bottoms" value="31X34">31 X 34</option>
-          	<option category="bottoms" value="31X36">31 X 36</option>
-          	<option category="bottoms" value="32X30">32 X 30</option>
-          	<option category="bottoms" value="32X32">32 X 32</option>
-          	<option category="bottoms" value="32X34">32 X 34</option>
-          	<option category="bottoms" value="32X36">32 X 36</option>
-          	<option category="bottoms" value="33X30">33 X 30</option>
-          	<option category="bottoms" value="33X32">33 X 32</option>
-          	<option category="bottoms" value="33X34">33 X 34</option>
-          	<option category="bottoms" value="33X36">33 X 36</option>
-          	
-          	<option category="shoes" value="M4/W6">M4/W6</option>
-          	<option category="shoes" value="M5/W7">M5/W7</option>
-          	<option category="shoes" value="M6/W8">M6/W8</option>
-          	<option category="shoes" value="M7/W9">M7/W9</option>
-          	<option category="shoes" value="M8/W10">M8/W10</option>
-          	<option category="shoes" value="M9/W11">M9/W11</option>
-          	<option category="shoes" value="M10/W12">M10/W12</option>
-          	<option category="shoes" value="M11/W13">M11/W13</option>
-          	<option category="shoes" value="M12/W14">M12/W14</option>
-          </select>
-	       	
-	       	
+	      <div id="tops"  style="display:none">
+		      <label for="t-sub-category">Type</label><br>
+	          <select id="t-sub-category" name="t-sub-category" >
+	            <option >Select type</option>
+	            <option value="hoodie">Hoodie</option>
+	            <option value="crewneck">Crewneck</option>
+	            <option value="zipup">Zipup</option>  
+	            <option value="fleece">Fleece</option>
+	          </select> 
+	          
+	          <label for="t-size">Size</label><br>
+	          <select id="t-size" name="t-size">
+	          	<option >Select size</option>
+	          	<option value="XS">XS</option>
+	          	<option value="S">S</option>
+	          	<option value="M">M</option>
+	          	<option value="L">L</option>
+	          	<option value="XL">XL</option>
+	          </select>
+          </div>
+          <div id="bottoms" style="display:none">
+		      <label for="b-sub-category">Type</label><br>
+	          <select id="b-sub-category" name="b-sub-category" >
+	            <option >Select type</option>
+	            <option value="jeans">Jeans</option>
+	            <option value="sweatpants">Sweatpants</option>
+	          </select> 
+	          
+	          <label for="b-size-1">Size</label><br>
+	          <select id="b-size-1" name="b-size-1" style="display:inline; width:30%">
+	          	<option >Select size</option>
+	          	<option value="26">26</option>
+	          	<option value="28">28</option>
+	          	<option value="29">29</option>
+	          	<option value="30">30</option>
+	          	<option value="31">31</option>
+	          	<option value="32">32</option>
+	          	<option value="33">33</option>
+	          </select>
+	          X
+	          <select id="b-size-2" name="b-size-2" style="display:inline; width:30%">
+	          	<option >Select size</option>
+	          	<option value="28">28</option>
+	          	<option value="30">30</option>
+	          	<option value="32">32</option>
+	          	<option value="34">34</option>
+	          	<option value="36">36</option>
+	          </select>    
+          </div>
+          <div id="shoes"  style="display:none">
+		      <label for="s-sub-category">Type</label><br>
+	          <select id="s-sub-category" name="s-sub-category" >
+	            <option >Select type</option>
+	            <option value="boots">Boots</option>
+	            <option value="sneakers">Sneakers</option>
+	            <option value="slides">Slides</option>
+	          </select> 
+	          
+	          <label for="s-size">Size</label><br>
+	          <select id="s-size" name="s-size">
+	          	<option >Select size</option>
+	          	<option value="4">M4/W6</option>
+	          	<option value="5">M5/W7</option>
+	          	<option value="6">M6/W8</option>
+	          	<option value="7">M7/W9</option>
+	          	<option value="8">M8/W10</option>
+	          	<option value="9">M9/W11</option>
+	          	<option value="10">M10/W12</option>
+	          	<option value="11">M11/W13</option>
+	          	<option value="12">M12/W14</option>
+	          </select>
+          </div>
 		<label for="color">Color</label><br>
-		<input type="text" id="color" name="color">
+		<select id="color" name="color">
+          	<option value="black">black</option>
+          	<option value="brown">brown</option>
+          	<option value="grey">grey</option>
+          	<option value="green">green</option>
+          	<option value="blue">blue</option>
+          	<option value="other">other</option>
+		</select>
 	       	
-	    <input type="submit" value="Submit"/>
+	    <input type="submit" id="submit" value="Submit"/>
      	</fieldset>
 	</form>
 	

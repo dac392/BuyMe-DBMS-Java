@@ -24,8 +24,6 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `deadline` DATE NULL,
   `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
-  `subcategory` VARCHAR(255) NULL,
-  `size` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,
   `link` VARCHAR(255) NULL,
   PRIMARY KEY (`aid`),
@@ -33,6 +31,43 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   CONSTRAINT `sp_username`
     FOREIGN KEY (`username`)
     REFERENCES `BuyMe`.`Enduser` (`username`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Tops` (
+  `aid` INT,
+  `subcategory` VARCHAR(255) NULL,
+  `size` INT,
+  PRIMARY KEY (`aid`),
+  CONSTRAINT `pt_aid`
+    FOREIGN KEY (`aid`)
+    REFERENCES `BuyMe`.`Sellsproduct` (`aid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Bottoms` (
+  `aid` INT,
+  `subcategory` VARCHAR(255) NULL,
+  `size1` VARCHAR(5) NULL,
+  `size2` VARCHAR(5) NULL,
+  PRIMARY KEY (`aid`),
+  CONSTRAINT `pb_aid`
+    FOREIGN KEY (`aid`)
+    REFERENCES `BuyMe`.`Sellsproduct` (`aid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`Shoes` (
+  `aid` INT,
+  `subcategory` VARCHAR(255) NULL,
+  `msize` INT,
+  PRIMARY KEY (`aid`),
+  CONSTRAINT `ps_aid`
+    FOREIGN KEY (`aid`)
+    REFERENCES `BuyMe`.`Sellsproduct` (`aid`)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );

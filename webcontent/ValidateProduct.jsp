@@ -12,16 +12,49 @@
 <body>
 	<% 
 		//Get parameters from the HTML form
-		String person = session.getAttribute("user").toString();
-		String auctionname = request.getParameter("auction-name");
-		float minimum = Float.parseFloat(request.getParameter("min-price")); 
-		float amount = Float.parseFloat(request.getParameter("amount"));
-		float increment = Float.parseFloat(request.getParameter("bid-increment"));
-		String date = request.getParameter("end-date");
-		String category = request.getParameter("category");
-		String sub = request.getParameter("sub-category");
-		String size = request.getParameter("size");
-		String color = request.getParameter("color");
+		String person, auctionname, date, category, color;
+		float minimum, amount, increment;
+		
+		try {
+			person = session.getAttribute("user").toString();
+			auctionname = request.getParameter("auction-name");
+			minimum = Float.parseFloat(request.getParameter("min-price")); 
+			amount = Float.parseFloat(request.getParameter("amount"));
+			increment = Float.parseFloat(request.getParameter("bid-increment"));
+			date = request.getParameter("end-date");
+			category = request.getParameter("category");
+			color = request.getParameter("color").toLowerCase();
+		
+		} catch (Exception e){
+			response.sendRedirect("ProductUpload.jsp");
+			return;
+		}
+		
+		float size1 = 0, size2 = 0; 
+		String sub = null;//default, I guess
+		
+		try {
+			switch (category){
+			case "tops":
+				sub = request.getParameter("t-sub-category");
+				size1 = (float)Utility.topSizeToNum(request.getParameter("t-size"));
+				break;
+			case "bottoms":
+				sub = request.getParameter("b-sub-category");
+				size1 = Float.parseFloat(request.getParameter("b-size-1"));
+				size2 = Float.parseFloat(request.getParameter("b-size-2"));
+				break;
+			case "shoes":
+				sub = request.getParameter("s-sub-category");
+				size1 = Float.parseFloat(request.getParameter("s-size"));
+				break;
+			default:
+			}
+		
+		} catch (Exception e){
+			response.sendRedirect("ProductUpload.jsp");
+			return;
+		}
 		
 		//Get the database connection
 		Database db = new Database();	
@@ -46,7 +79,7 @@
 		
 		
 		//Make an insert statement for the Users table:
-		String insert = "INSERT INTO Sellsproduct(aid, isopen, auctionname, username, minimumprice, amount, bidincrement, deadline, category, subcategory, size, color, link)"+ "VALUES (null,true,?,?,?,?,?,?,?,?,?,?,?)";
+		String insert = "INSERT INTO Sellsproduct(aid, isopen, auctionname, username, minimumprice, amount, bidincrement, deadline, category, color, link)"+ "VALUES (null,true,?,?,?,?,?,?,?,?,?)";
 		
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = con.prepareStatement(insert);
@@ -60,30 +93,65 @@
 		ps.setString(5, increment+"");
 		ps.setString(6, date);
 		ps.setString(7, category);
-		ps.setString(8, sub);
-		ps.setString(9, size);
-		ps.setString(10, color);
-		ps.setString(11, link);
-		
+		ps.setString(8, color);
+		ps.setString(9, link);
 		
 		ps.executeUpdate();
 		
-
 	    Statement st = con.createStatement();
 	    ResultSet rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.aid=(SELECT max(s.aid) FROM Sellsproduct s where username ='" +person+"');");
 	    int newAid = -1;
 	    if (rs.next()){
 	    	newAid = rs.getInt("aid");
 	    }
+	    
+		if (newAid == -1){
+			response.sendRedirect("ProductUpload.jsp");
+		}
+		
+	    
+	    //Store subcategory data
+	    switch (category){
+	    case "tops":
+	    	insert = "INSERT INTO Tops(aid, subcategory, size)"+ "VALUES (?,?,?)";
+	    	ps = con.prepareStatement(insert);
+	    	
+	    	ps.setString(1, newAid+"");
+			ps.setString(2, sub);
+			ps.setString(3, size1+"");
+			
+			ps.executeUpdate();
+			break;
+	    case "bottoms":
+	    	insert = "INSERT INTO Bottoms(aid, subcategory, size1, size2)"+ "VALUES (?,?,?,?)";
+	    	ps = con.prepareStatement(insert);
+	    	
+	    	ps.setString(1, newAid+"");
+			ps.setString(2, sub);
+			ps.setString(3, size1+"");
+			ps.setString(4, size2+"");
+			
+			ps.executeUpdate();
+			break;
+	    case "shoes":
+	    	insert = "INSERT INTO Shoes(aid, subcategory, msize)"+ "VALUES (?,?,?)";
+	    	ps = con.prepareStatement(insert);
+	    	
+	    	ps.setString(1, newAid+"");
+			ps.setString(2, sub);
+			ps.setString(3, size1+"");
+			
+			ps.executeUpdate();
+			break;
+		default:
+	    }
+	    
 		
 		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 		con.close();
 		out.print("insert succeeded");
-		if (newAid != -1){
-			response.sendRedirect("ProductListing.jsp?aid="+newAid);
-		} else {
-			response.sendRedirect("ProductUpload.jsp");
-		}
+		
+		response.sendRedirect("ProductListing.jsp?aid="+newAid);
 	%>
 	
 	
