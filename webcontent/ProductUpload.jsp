@@ -46,7 +46,7 @@
 	       	<input type="text" id="bid-increment" name="bid-increment"/> <br/>
 	       	
 	       	<label for="end-date">Closing date:</label>
-	       	<input type="date" id="end-date" name="end-date"/> <br/>
+	       	<input type="datetime-local" id="end-date" name="end-date"/> <br/>
 	      
 	      <label for="category">Category</label><br>
           <select id="category" name="category" onchange="updateForm(this.value)">

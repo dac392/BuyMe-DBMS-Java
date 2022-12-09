@@ -21,7 +21,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `minimumprice` DOUBLE NULL,
   `amount` DOUBLE NULL,
   `bidincrement` DOUBLE NULL,
-  `deadline` DATE NULL,
+  `deadline` DATETIME NULL,
   `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,
@@ -79,6 +79,19 @@ CREATE TABLE `BuyMe`.`Notifications` (
 	`posttime` DATETIME,
 	PRIMARY KEY (`nid`, `username`),
 	CONSTRAINT `n_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
+CREATE TABLE `BuyMe`.`SupportRequests` (
+	`srid` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255),
+	`description` VARCHAR(255) NULL,
+	`posttime` DATETIME,
+	PRIMARY KEY (`srid`, `username`),
+	CONSTRAINT `sr_username`
 		FOREIGN KEY (`username`)
 		REFERENCES `BuyMe`.`Enduser`(`username`)
 		ON DELETE CASCADE
