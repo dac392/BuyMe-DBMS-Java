@@ -85,6 +85,19 @@ CREATE TABLE `BuyMe`.`Notifications` (
 		ON UPDATE CASCADE
 );
 
+CREATE TABLE `BuyMe`.`SupportRequests` (
+	`srid` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255),
+	`description` VARCHAR(255) NULL,
+	`posttime` DATETIME,
+	PRIMARY KEY (`srid`, `username`),
+	CONSTRAINT `sr_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
 CREATE TABLE `BuyMe`.`Assets` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `link` VARCHAR(255) NULL,
