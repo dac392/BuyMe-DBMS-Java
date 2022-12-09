@@ -21,7 +21,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `minimumprice` DOUBLE NULL,
   `amount` DOUBLE NULL,
   `bidincrement` DOUBLE NULL,
-  `deadline` DATE NULL,
+  `deadline` DATETIME NULL,
   `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,

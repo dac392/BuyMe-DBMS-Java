@@ -89,7 +89,7 @@
 						<br>
 						<hr>
 						<br>
-						<p>Closing date: <%= deadline %></p>
+						<p>Closing time: <%= deadline %></p>
 						<p>Size: <%= size %></p>
 						<p>Color: <%= color %></p>
 						

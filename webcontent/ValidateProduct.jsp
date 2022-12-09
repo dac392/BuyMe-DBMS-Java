@@ -22,6 +22,7 @@
 			amount = Float.parseFloat(request.getParameter("amount"));
 			increment = Float.parseFloat(request.getParameter("bid-increment"));
 			date = request.getParameter("end-date");
+			date = date.substring(0, 10)+" "+date.substring(11,16)+":00";
 			category = request.getParameter("category");
 			color = request.getParameter("color").toLowerCase();
 		
