@@ -21,7 +21,7 @@
 	     		if (header_isadmin != null && ((Boolean)header_isadmin).booleanValue()){ %>
 	     		<li class="nav-item active"><a class="nav-link" href="AdminPage.jsp">Admin</a></li>
 	     	<% } %>
-	     		<li class="nav-item active"><a class="nav-link" href="CustomerSupport.jsp">Customer Supprt</a></li>
+	     		<li class="nav-item active"><a class="nav-link" href="CustomerSupport.jsp">Customer Support</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ProductUpload.jsp">Sell Item</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ShowNotifications.jsp">Notifications</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="Logout.jsp">Log out</a></li>
