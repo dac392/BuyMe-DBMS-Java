@@ -105,23 +105,13 @@ CREATE TABLE `BuyMe`.`Assets` (
 );
 
 CREATE TABLE `BuyMe`.`Bids` (
-	`bid` INT NOT NULL AUTO_INCREMENT,
-	`username` VARCHAR(255),
-	`aid` INT,
-	`bidvalue` DOUBLE NULL,
-	`bidtime` DATETIME,
-	`isenabled` BOOLEAN,
-	PRIMARY KEY (`bid`),
-	CONSTRAINT `b_username`
-		FOREIGN KEY (`username`)
-		REFERENCES `BuyMe`.`Enduser`(`username`)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-	CONSTRAINT `b_sellsproduct`
-		FOREIGN KEY (`aid`)
-		REFERENCES `BuyMe`.`Sellsproduct`(`aid`)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+  `aid` INT NOT NULL,
+  `username` VARCHAR(255) NOT NULL,
+  `floor` DOUBLE NULL,
+  `ceiling` DOUBLE NULL,
+  `type` VARCHAR(45) NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`aid`, `username`, `date`)
 );
 
 CREATE TABLE `BuyMe`.`WatchesAuction` (

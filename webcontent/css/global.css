@@ -122,6 +122,10 @@ header a:not(.header-title):hover::after{
 	height: 2em;
 }
 
+.ignore{
+	display: none;
+}
+
 @media screen and (max-width: 700px){
 	.search-bar input{
 		width: 100%;
