@@ -27,7 +27,7 @@ input[type=submit]{
 	font-weight: bold;
 	font-size: 1.2em;
 	margin-top: 0.5em;
-	
+	cursor: pointer;
 }
 
 input[type=submit]:hover {

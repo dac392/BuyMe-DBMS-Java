@@ -25,7 +25,6 @@
 	%>
 		
 		<% if(rs.next()){
-		
 			String username = rs.getString("username");
 			String auctionname = rs.getString("auctionname");
 			String link = rs.getString("link");
@@ -95,7 +94,8 @@
 						
 						<% if(session.getAttribute("user")==null || 
 								!username.equals(session.getAttribute("user").toString())){ %>
-							<a href="makeBid.jsp" class="button">Make an offer</a>
+							<a href=<%= "makeBid.jsp?aid="+aid%> class="button">Bid</a>
+							<a href=<%= "bidHistory.jsp?aid="+aid%> class="button">Bid History</a>
 						<% } %>
 						
 					</div>
