@@ -52,9 +52,11 @@
 				String str = "SELECT * FROM Enduser e WHERE e.username = \'"+username+"\'";
 				
 				Object header_isadmin = session.getAttribute("user-isadmin");
-	     		if (header_isadmin != null && ((Boolean)header_isadmin).booleanValue()){
-					str.concat(" and e.isstaff = false");
+	     		if (header_isadmin != null && !((Boolean)header_isadmin).booleanValue()){
+					str = str.concat(" and e.isstaff = false");
 				}
+
+				System.out.println(str);
 				
 				//Run the query against the database.
 				ResultSet result = stmt.executeQuery(str);
@@ -71,6 +73,8 @@
 					//Add parameters of the query.
 					ps.setString(1, username);
 					ps.executeUpdate();
+					
+					out.println("Success");
 				} else {
 				
 					String update = "UPDATE Enduser e SET e."+value+" = ? WHERE e.username = ?;";
@@ -81,13 +85,13 @@
 					//Add parameters of the query.
 					ps.setString(1, new_data);
 					ps.setString(2, username);
-					System.out.println(ps);
 					ps.executeUpdate();
+					
+					out.println("Success");
 				}
 				
 				con.close();
 				
-				out.println("Success");
 			} else if (type.equals("response")){
 				int srid = Integer.parseInt(request.getParameter("srid"));
 				String reply = request.getParameter("supportresponse"+srid);
