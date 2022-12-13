@@ -112,6 +112,16 @@ CREATE TABLE `BuyMe`.`Bids` (
   `type` VARCHAR(45) NULL,
   `date` DATETIME NOT NULL,
   PRIMARY KEY (`aid`, `username`, `date`)
+  CONSTRAINT `b_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+  CONSTRAINT `b_aid`
+		FOREIGN KEY (`aid`)
+		REFERENCES `BuyMe`.`Sellsproduct`(`aid`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE `BuyMe`.`WatchesAuction` (

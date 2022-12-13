@@ -19,6 +19,8 @@
 			Connection con = db.getConnection();
 			
 			String type = request.getParameter("type");
+
+			
 			if (type.equals("ticket")){
 				String ticket = request.getParameter("supportrequest");
 				
@@ -41,6 +43,51 @@
 				
 				con.close();
 				
+			} else if (type.equals("update-user-info")){
+				String username = request.getParameter("old-username");
+				String value = request.getParameter("value");
+				String new_data = request.getParameter("new-value");
+				
+				Statement stmt = con.createStatement();
+				String str = "SELECT * FROM Enduser e WHERE e.username = \'"+username+"\'";
+				
+				Object header_isadmin = session.getAttribute("user-isadmin");
+	     		if (header_isadmin != null && ((Boolean)header_isadmin).booleanValue()){
+					str.concat(" and e.isstaff = false");
+				}
+				
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				if (!result.next()){
+					con.close();
+					
+					out.println("Action Denied");
+				} else if (value != null && value.equals("delete")){
+					String update = "DELETE FROM Enduser e WHERE e.username = ?;";
+					
+					//Create a Prepared SQL statement allowing you to introduce the parameters of the query
+					PreparedStatement ps = con.prepareStatement(update);
+			
+					//Add parameters of the query.
+					ps.setString(1, username);
+					ps.executeUpdate();
+				} else {
+				
+					String update = "UPDATE Enduser e SET e."+value+" = ? WHERE e.username = ?;";
+					
+					//Create a Prepared SQL statement allowing you to introduce the parameters of the query
+					PreparedStatement ps = con.prepareStatement(update);
+			
+					//Add parameters of the query.
+					ps.setString(1, new_data);
+					ps.setString(2, username);
+					System.out.println(ps);
+					ps.executeUpdate();
+				}
+				
+				con.close();
+				
+				out.println("Success");
 			} else if (type.equals("response")){
 				int srid = Integer.parseInt(request.getParameter("srid"));
 				String reply = request.getParameter("supportresponse"+srid);
