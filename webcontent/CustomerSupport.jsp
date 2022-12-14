@@ -17,10 +17,48 @@
    </head>
    <body>
    <%@ include file="Components/Header.jsp" %>
+   
+   	<h1>Customer Support</h1>
    <% 
   		Object header_isstaff = session.getAttribute("user-isstaff");
   		if (header_isstaff != null && ((Boolean)header_isstaff).booleanValue()){ 
-  			
+  	%>		
+		<h2>Edit User Info</h2>
+			<script>
+		    	function updateForm(value){
+		    		if (value !== "delete"){
+		    			document.getElementById("u-newval").style.display = 'block';
+		    		} else {
+		    			document.getElementById("u-newval").style.display = 'none';
+		    		}
+		    		
+		    	}
+		    </script>
+			<form action="SubmitSupportRequest.jsp" method="POST" id="userinfoform">
+				<label for="old-username">User to Edit</label>
+     			<input type="text" id="old-username" name="old-username"/>
+     			
+     			<br/>
+     			<label for="value">Value to Update</label><br>
+     			<select id="value" name="value" onchange="updateForm(this.value)">
+		           <option value="username">User Name</option>
+		           <option value="name">Name</option> 
+		           <option value="email">Email</option> 
+		           <option value="password">Password</option> 
+		           <option value="delete">Delete Account</option>
+		        </select> <br/>
+		        <div id="u-newval" style="display:block">
+     			<label for="new-value">New value</label>
+     			<input type="text" id="new-value" name="new-value"/> <br/>
+     			</div>
+		
+				
+		       	<input type="hidden" id="hidden-u" name="type" value="update-user-info"/>
+				<input type="submit" value="Submit"/>
+			</form>
+		
+		<h2>Customer Tickets</h2>
+  	<% 
 		    //Get the database connection
 			Database db = new Database();	
 			Connection con = db.getConnection();		
