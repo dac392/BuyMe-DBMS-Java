@@ -46,7 +46,7 @@ public class Utility{
 		case "XL":
 			return 2;
 		}
-		return 0;
+		return -3;
 	}
 	
 	public static String numToTopSize(int input) {
