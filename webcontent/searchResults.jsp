@@ -58,7 +58,7 @@
 			
 			String cmp = "=";
 			String property = "";
-								//	*		*			*		*				*		*			
+								//	*		*			*		*				*		*			*
 			String properties[] = {"color", "price", "seller", "isopen", "category", "subcategory", "size" };
 			for (int j = 0; j < properties.length; j++){
 				if (s.length() >= properties[j].length()+2 &&
@@ -76,6 +76,7 @@
 					property = properties[j];
 					cmp = s.substring(properties[j].length(),properties[j].length()+cmp_size);
 					s = s.substring(properties[j].length()+cmp_size);
+					System.out.println(property+"|"+s);
 					break;
 				}
 			}
@@ -200,6 +201,31 @@
 				
 			}	
 			
+			if (s.contains("x")){
+				int size1, size2;
+				int xIndex = s.indexOf("x");
+				try{
+					size1 = Integer.parseInt(s.substring(0, xIndex));
+					size2 = Integer.parseInt(s.substring(xIndex+1));
+					
+					if (table.equals("Sellsproduct s")){
+						table = "Sellsproduct s JOIN Bottoms b USING(aid)";
+					} else if (!table.equals("Sellsproduct s JOIN Bottoms b USING(aid)")) {
+						table = "error";
+						break;
+					}
+					
+					if (conditions.length() == 0){
+						conditions += " WHERE ";
+					} else {
+						conditions += " AND ";
+					}
+					conditions += "b.size1 "+cmp+" "+size1+" AND b.size2 "+cmp+" "+size2;
+				} catch (Exception e){
+					
+				}
+			}
+			
 			if (s.equals("shoes")){
 				if (table.equals("Sellsproduct s")){
 					table = "Sellsproduct s JOIN Shoes sh USING(aid)";
@@ -226,6 +252,44 @@
 				}
 				conditions += "sh.subcategory = \""+s+"\"";
 				
+			}
+			
+			if (s.charAt(0) == 'm' || s.charAt(0) == 'w'){
+				int msize;
+				int xIndex;
+				try{
+					if (s.charAt(0) == 'm' && s.contains("/w")){
+						xIndex = s.indexOf("/w");
+					} else {
+						xIndex = s.length();
+					}
+					msize = Integer.parseInt(s.substring(1, xIndex));
+					if (s.charAt(0) == 'w'){
+						msize -= 2;
+					}
+					if (s.contains("/w")){
+						int wsize = Integer.parseInt(s.substring(xIndex+2, s.length()));
+						if (wsize - msize != 2){
+							throw new Exception();
+						}
+					}
+					
+					if (table.equals("Sellsproduct s")){
+						table = "Sellsproduct s JOIN Shoes sh USING(aid)";
+					} else if (!table.equals("Sellsproduct s JOIN Shoes sh USING(aid)")) {
+						table = "error";
+						break;
+					}
+					
+					if (conditions.length() == 0){
+						conditions += " WHERE ";
+					} else {
+						conditions += " AND ";
+					}
+					conditions += "sh.msize "+cmp+" "+msize;
+				} catch (Exception e){
+					
+				}
 			}
 			
 			
