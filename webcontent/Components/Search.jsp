@@ -2,14 +2,14 @@
 
 
 <div class="search-bar">
-	<% String sb_searchvalue = request.getParameter("search"); %>
 	<form method="get" action="searchResults.jsp" id="search-form" class="search-bar">
 		<input type="text" id="search" name="search" <%
+			String sb_searchvalue = request.getParameter("search");
 			if (sb_searchvalue != null){
 				out.print("value=\""+sb_searchvalue+"\"");
 			}
 		%>>
-		<a onclick="document.getElementById('search-form').submit()"><img id="seach-btn" src="Assets/icn-search.svg" alt="search"></a></br>
+		<a onclick="document.getElementById('search-form').submit()"><img id="seach-btn" src="Assets/icn-search.svg" alt="search"></a>
 		<select id="search-sort" name="search-sort" >
           <option value="id">Sort By Post Order</option>
           <option value="deadline">Sort By Deadline</option>

@@ -19,6 +19,13 @@
 		if (search == null){
 			search = "";
 		}
+		if (search_sort == null){
+			search_sort = "id";
+		}
+		if (search_sort_dir == null){
+			search_sort_dir = "desc";
+		}
+		
 		ArrayList<String> termlist = new ArrayList<String>();
 		for (int i = 0; i < search.length(); i++){
 			if (!Character.isWhitespace(search.charAt(i))){
@@ -47,7 +54,7 @@
 		} else if (search_sort.equals("price")) {
 			ordering = " ORDER BY s.amount ";
 		}
-		if (search_sort_dir.equals("desc")){
+		if (!search_sort_dir.equals("asc")){
 			ordering += " DESC ";
 		}
 		
