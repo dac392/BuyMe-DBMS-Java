@@ -73,6 +73,18 @@ CREATE TABLE `BuyMe`.`Shoes` (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE `BuyMe`.`Alerts` (
+	`alid` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255),
+	`searchquery` VARCHAR(255) NULL,
+	PRIMARY KEY (`alid`, `username`),
+	CONSTRAINT `al_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
 CREATE TABLE `BuyMe`.`Notifications` (
 	`nid` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255),
