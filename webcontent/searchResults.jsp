@@ -16,6 +16,9 @@
 		String search = request.getParameter("search");
 		String search_sort = request.getParameter("search-sort");
 		String search_sort_dir = request.getParameter("search-sort-order");
+		
+		String recency = request.getParameter("recency"); //yes I know this is jank
+		
 		if (search == null){
 			search = "";
 		}
@@ -179,6 +182,13 @@
 					table = "error";
 					break;
 				}
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "t.size "+cmp+" \""+Utility.topSizeToNum(s)+"\"";
 			}
 				
 			if (s.equals("bottoms")){
@@ -301,6 +311,20 @@
 			
 			
 			
+		}
+		if (recency != null && recency.equals("lastmonth")){
+			if (conditions.length() == 0){
+				conditions += " WHERE ";
+			} else {
+				conditions += " AND ";
+			}
+			
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+		    Timestamp timeStampObj = new java.sql.Timestamp(calendar.getTime().getTime());
+		    
+			
+			conditions += "s.posttime > \'" + timeStampObj.toString()+"\'";
 		}
 		if (table.equals("error")){
 			con.close();

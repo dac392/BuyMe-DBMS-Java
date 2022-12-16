@@ -22,6 +22,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `amount` DOUBLE NULL,
   `bidincrement` DOUBLE NULL,
   `deadline` DATETIME NULL,
+  `posttime` DATETIME NULL,
   `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,

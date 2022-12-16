@@ -10,6 +10,11 @@ public class Utility{
 	
 	private Utility(){}
 
+	public static String getCurrentTime() {
+		
+		return "";
+	}
+	
 	public static void sendNotif(String username, String description, Connection con) {
 		try {
 			String insert = "INSERT INTO Notifications(username, description, posttime)"+ "VALUES (?, ?, ?)";
@@ -22,7 +27,6 @@ public class Utility{
 			Calendar calendar = Calendar.getInstance();
 		    Timestamp timeStampObj = new java.sql.Timestamp(calendar.getTime().getTime());
 		    
-			
 			ps.setTimestamp(3, timeStampObj);
 			ps.executeUpdate();
 			System.out.println("Notif Sent!");
@@ -34,7 +38,7 @@ public class Utility{
 	}
 	
 	public static int topSizeToNum(String input) {
-		switch(input) {
+		switch(input.toUpperCase()) {
 		case "XS":
 			return -2;
 		case "S":

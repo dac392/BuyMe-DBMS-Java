@@ -37,25 +37,53 @@
 			String size = "N/A";
 			ResultSet subset;
 			
+			String similarSearch = "";
+			
+			
 			switch (category){
 			case "tops":
 				subset = st.executeQuery("SELECT * FROM Tops t WHERE t.aid="+aid+";");
 				subset.next();
 				subcategory = subset.getString("subcategory");
-				size = Utility.numToTopSize(subset.getInt("size"));
+				int sizenum = subset.getInt("size");
+				size = Utility.numToTopSize(sizenum);
+				
+				similarSearch += subcategory+" ";
+				if (sizenum < 2)
+					similarSearch += "size<="+Utility.numToTopSize(sizenum+1);
+				if (sizenum > -2)
+					similarSearch += 
+					" size>="+Utility.numToTopSize(sizenum-1);
+					
 				break;
 			case "bottoms":
 				subset = st.executeQuery("SELECT * FROM Bottoms b WHERE b.aid="+aid+";");
 				subset.next();
 				subcategory = subset.getString("subcategory");
-				size = subset.getInt("size1")+"X"+subset.getInt("size2");
+				
+				int size1 = subset.getInt("size1");
+				int size2 = subset.getInt("size2");
+				
+				size = size1+"X"+size2;
+				
+				similarSearch += subcategory+" "+
+						"size<="+(size1+1)+"X"+(size2+1)+
+						" size>="+(size1-1)+"X"+(size2-1);
+				
 				break;
 			case "shoes":
 				subset = st.executeQuery("SELECT * FROM Shoes s WHERE s.aid="+aid+";");
 				subset.next();
 				subcategory = subset.getString("subcategory");
+				
 				int msize = subset.getInt("msize");
+				
 				size = "M"+msize+"/W"+(msize+2);
+				
+				similarSearch += subcategory+" "+
+						"size<=M"+(msize+1)+"/W"+(msize+3)+
+						" size>=M"+(msize-1)+"/W"+(msize+1);
+				
 				break;
 			}
 		
@@ -97,6 +125,7 @@
 							<a href=<%= "makeBid.jsp?aid="+aid%> class="button">Bid</a>
 							<a href=<%= "bidHistory.jsp?aid="+aid%> class="button">Bid History</a>
 						<% } %>
+							<a href=<%= "\"searchResults.jsp?search="+similarSearch+"&recency=lastmonth\""%> class="button">View Similar</a>
 						
 					</div>
 				</fieldset>
