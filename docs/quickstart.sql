@@ -77,6 +77,7 @@ CREATE TABLE `BuyMe`.`Alerts` (
 	`alid` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255),
 	`searchquery` VARCHAR(255) NULL,
+	`prevcheck` DATETIME NULL,
 	PRIMARY KEY (`alid`, `username`),
 	CONSTRAINT `al_username`
 		FOREIGN KEY (`username`)

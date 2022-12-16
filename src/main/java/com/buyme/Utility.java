@@ -1,10 +1,7 @@
 package com.buyme;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Calendar;
+import java.sql.*;
+import java.util.*;
 
 public class Utility{
 	
@@ -67,6 +64,281 @@ public class Utility{
 			return "XL";
 		}
 		return "?";
+	}
+	
+	public static String[] searchQuery(String query) {
+		
+		
+		ArrayList<String> termlist = new ArrayList<String>();
+		for (int i = 0; i < query.length(); i++){
+			if (!Character.isWhitespace(query.charAt(i))){
+				String term = "";
+				while (i < query.length() && !Character.isWhitespace(query.charAt(i))){
+					term = term.concat(Character.toString(query.charAt(i)));
+					i++;
+				}
+				termlist.add(term);
+			}
+		}
+		
+		String table = "Sellsproduct s";
+		String conditions = "";
+		
+		//I am fully aware that this page is basically security breach bait. 
+		//Since this is a school project, I don't care.
+		for (int i = 0; i < termlist.size(); i++){
+			String s = termlist.get(i).toLowerCase();
+			
+			String cmp = "=";
+			String property = "";
+								//	*		*			*		*				*		*			*
+			String properties[] = {"color", "price", "seller", "isopen", "category", "subcategory", "size" };
+			for (int j = 0; j < properties.length; j++){
+				if (s.length() >= properties[j].length()+2 &&
+						s.substring(0,properties[j].length()).equals(properties[j])){
+					char localChar = s.charAt(properties[j].length());
+					if (localChar != '=' && localChar != '>' && localChar != '<'){
+						continue;
+					}
+					int cmp_size = 1;
+					
+					if (localChar != '=' && s.charAt(properties[j].length()+1) == '='){
+						cmp_size++;
+					}
+					
+					property = properties[j];
+					cmp = s.substring(properties[j].length(),properties[j].length()+cmp_size);
+					s = s.substring(properties[j].length()+cmp_size);
+					System.out.println(property+"|"+s);
+					break;
+				}
+			}
+				
+			if (property.equals("seller")){
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "s.username = \""+s+"\"";
+				
+			}
+			
+			if (property.equals("price")){
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "s.amount "+cmp+" \""+s+"\"";
+				
+			}
+			
+			if (s.equals("black") ||
+					s.equals("brown") ||
+					s.equals("grey") ||
+					s.equals("green") ||
+					s.equals("blue")){
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "s.color = \""+s+"\"";
+				
+			}
+			
+			if (s.equals("open") ||
+					s.equals("closed")){
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				
+				if (s.equals("open")){
+					conditions += "s.isopen = 1";
+				} else {
+					conditions += "s.isopen = 0";
+				}
+				
+			}
+			
+			
+			if (s.equals("tops")){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Tops t USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Tops t USING(aid)")) {
+					table = "error";
+					break;
+				}
+			}
+			
+			if (s.equals("hoodie") ||
+					s.equals("crewneck") ||
+					s.equals("zipup") ||
+					s.equals("fleece")){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Tops t USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Tops t USING(aid)")) {
+					table = "error";
+					break;
+				}
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "t.subcategory = \""+s+"\"";
+				
+			}
+			
+			if (Utility.topSizeToNum(s) != -3){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Tops t USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Tops t USING(aid)")) {
+					table = "error";
+					break;
+				}
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "t.size "+cmp+" \""+Utility.topSizeToNum(s)+"\"";
+			}
+				
+			if (s.equals("bottoms")){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Bottoms b USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Bottoms b USING(aid)")) {
+					table = "error";
+					break;
+				}
+			}
+			
+			if (s.equals("jeans") ||
+					s.equals("sweatpants")){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Bottoms b USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Bottoms b USING(aid)")) {
+					table = "error";
+					break;
+				}
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "b.subcategory = \""+s+"\"";
+				
+			}	
+			
+			if (s.contains("x")){
+				int size1, size2;
+				int xIndex = s.indexOf("x");
+				try{
+					size1 = Integer.parseInt(s.substring(0, xIndex));
+					size2 = Integer.parseInt(s.substring(xIndex+1));
+					
+					if (table.equals("Sellsproduct s")){
+						table = "Sellsproduct s JOIN Bottoms b USING(aid)";
+					} else if (!table.equals("Sellsproduct s JOIN Bottoms b USING(aid)")) {
+						table = "error";
+						break;
+					}
+					
+					if (conditions.length() == 0){
+						conditions += " WHERE ";
+					} else {
+						conditions += " AND ";
+					}
+					conditions += "b.size1 "+cmp+" "+size1+" AND b.size2 "+cmp+" "+size2;
+				} catch (Exception e){
+					
+				}
+			}
+			
+			if (s.equals("shoes")){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Shoes sh USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Shoes sh USING(aid)")) {
+					table = "error";
+					break;
+				}
+			}
+			
+			if (s.equals("boots") ||
+					s.equals("sneakers") ||
+					s.equals("slides")){
+				if (table.equals("Sellsproduct s")){
+					table = "Sellsproduct s JOIN Shoes sh USING(aid)";
+				} else if (!table.equals("Sellsproduct s JOIN Shoes sh USING(aid)")) {
+					table = "error";
+					break;
+				}
+				
+				if (conditions.length() == 0){
+					conditions += " WHERE ";
+				} else {
+					conditions += " AND ";
+				}
+				conditions += "sh.subcategory = \""+s+"\"";
+				
+			}
+			
+			if (s.charAt(0) == 'm' || s.charAt(0) == 'w'){
+				int msize;
+				int xIndex;
+				try{
+					if (s.charAt(0) == 'm' && s.contains("/w")){
+						xIndex = s.indexOf("/w");
+					} else {
+						xIndex = s.length();
+					}
+					msize = Integer.parseInt(s.substring(1, xIndex));
+					if (s.charAt(0) == 'w'){
+						msize -= 2;
+					}
+					if (s.contains("/w")){
+						int wsize = Integer.parseInt(s.substring(xIndex+2, s.length()));
+						if (wsize - msize != 2){
+							throw new Exception();
+						}
+					}
+					
+					if (table.equals("Sellsproduct s")){
+						table = "Sellsproduct s JOIN Shoes sh USING(aid)";
+					} else if (!table.equals("Sellsproduct s JOIN Shoes sh USING(aid)")) {
+						table = "error";
+						break;
+					}
+					
+					if (conditions.length() == 0){
+						conditions += " WHERE ";
+					} else {
+						conditions += " AND ";
+					}
+					conditions += "sh.msize "+cmp+" "+msize;
+				} catch (Exception e){
+					
+				}
+			}
+			
+			
+			
+		}
+		
+		String[] out = {table,conditions};
+		
+		return out;
 	}
 	
 	

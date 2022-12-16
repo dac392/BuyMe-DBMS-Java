@@ -23,6 +23,7 @@
 	     	<% } %>
 	     		<li class="nav-item active"><a class="nav-link" href="CustomerSupport.jsp">Customer Support</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ProductUpload.jsp">Sell Item</a></li>
+	     		<li class="nav-item active"><a class="nav-link" href="ManageAlerts.jsp">Alerts</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ShowNotifications.jsp">Notifications</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="Logout.jsp">Log out</a></li>
 	     		<li class="nav-item active"><a class="nav-link" href="ShowEndUsers.jsp">Debug</a></li>
