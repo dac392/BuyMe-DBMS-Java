@@ -3,10 +3,10 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <% 
-
+	
 	String userid = (String)session.getAttribute("user");	
-	boolean isadmin = (Boolean)session.getAttribute("user-isadmin");
-	if (userid == null || isadmin == false) {
+	Boolean isadmin = (Boolean)session.getAttribute("user-isadmin");
+	if (userid == null || isadmin == null || isadmin.booleanValue() == false) {
 		response.sendRedirect("Login.jsp");
 	}
 %>

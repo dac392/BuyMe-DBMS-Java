@@ -22,6 +22,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `amount` DOUBLE NULL,
   `bidincrement` DOUBLE NULL,
   `deadline` DATETIME NULL,
+  `posttime` DATETIME NULL,
   `isopen` BOOLEAN,
   `category` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,
@@ -72,6 +73,19 @@ CREATE TABLE `BuyMe`.`Shoes` (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE `BuyMe`.`Alerts` (
+	`alid` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255),
+	`searchquery` VARCHAR(255) NULL,
+	`prevcheck` DATETIME NULL,
+	PRIMARY KEY (`alid`, `username`),
+	CONSTRAINT `al_username`
+		FOREIGN KEY (`username`)
+		REFERENCES `BuyMe`.`Enduser`(`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
 CREATE TABLE `BuyMe`.`Notifications` (
 	`nid` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255),
@@ -111,12 +125,12 @@ CREATE TABLE `BuyMe`.`Bids` (
   `ceiling` DOUBLE NULL,
   `type` VARCHAR(45) NULL,
   `date` DATETIME NOT NULL,
-  PRIMARY KEY (`aid`, `username`, `date`)
+  PRIMARY KEY (`aid`, `username`, `date`),
   CONSTRAINT `b_username`
 		FOREIGN KEY (`username`)
 		REFERENCES `BuyMe`.`Enduser`(`username`)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
   CONSTRAINT `b_aid`
 		FOREIGN KEY (`aid`)
 		REFERENCES `BuyMe`.`Sellsproduct`(`aid`)
