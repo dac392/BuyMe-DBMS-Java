@@ -1,3 +1,5 @@
+<%@ page import ="java.io.*,java.util.*,java.sql.*,com.buyme.*"%>
+
 <%
    if ((session.getAttribute("user") == null)) {
 %>
@@ -17,6 +19,9 @@
 	     <nav class="navbar">
 	     	<ul class="navbar-nav">
 	     	<% 
+	     		Utility.checkAlerts((String)session.getAttribute("user"));
+	     	
+	     	
 	     		Object header_isadmin = session.getAttribute("user-isadmin");
 	     		if (header_isadmin != null && ((Boolean)header_isadmin).booleanValue()){ %>
 	     		<li class="nav-item active"><a class="nav-link" href="AdminPage.jsp">Admin</a></li>

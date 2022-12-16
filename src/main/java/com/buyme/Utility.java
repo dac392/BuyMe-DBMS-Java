@@ -66,6 +66,63 @@ public class Utility{
 		return "?";
 	}
 	
+	public static void checkAlerts(String username) throws SQLException  {
+		String querry = "SELECT * FROM Alerts a WHERE a.username = '"+username+"'";
+		
+		Database db = new Database();	
+		Connection con = db.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(querry);
+		
+		ArrayList<String> queryQueue = new ArrayList<String>();
+		
+		while (rs.next()) {
+			String[] conditions = searchQuery(rs.getString("searchquery"));
+			if (conditions[0].equals("error")) {
+				break;
+			}
+			
+			String query = conditions[0]+conditions[1];
+			if (conditions[1].length() == 0){
+				query += " WHERE ";
+			} else {
+				query += " AND ";
+			}
+			query += "s.posttime > '"+rs.getString("prevcheck")+"'";
+			queryQueue.add(query);
+			
+			String update = "UPDATE Alerts a SET a.prevcheck = ? WHERE a.alid = ?";
+			
+			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
+			PreparedStatement ps = con.prepareStatement(update);
+	
+			//Add parameters of the query.
+			Calendar calendar = Calendar.getInstance();
+		    Timestamp timeStampObj = new java.sql.Timestamp(calendar.getTime().getTime());
+		    ps.setTimestamp(1, timeStampObj);
+		    
+			ps.setInt(2, rs.getInt("alid"));
+			
+			System.out.println(ps);
+			ps.executeUpdate();
+			
+		}
+		ArrayList<Integer> seenBefore = new ArrayList<Integer>();
+		for (String q : queryQueue) {
+			querry = "SELECT * FROM "+q;
+			rs = st.executeQuery(querry);
+			while(rs.next()) {
+				int id = rs.getInt("aid");
+				if (seenBefore.contains(id)) {
+					break;
+				}
+				sendNotif(username, "Alert! you may be interested in this <a href='ProductListing.jsp?aid="+
+						id+"'>newly available item!</a>", con);
+				seenBefore.add(id);
+			}
+		}
+	}
+	
 	public static String[] searchQuery(String query) {
 		
 		
