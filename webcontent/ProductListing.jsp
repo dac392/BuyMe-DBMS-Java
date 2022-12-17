@@ -109,6 +109,10 @@
 					</div>
 					
 					<div class="info">
+						<% if(session.getAttribute("user-isstaff")!=null && 
+								((Boolean)session.getAttribute("user-isstaff")).booleanValue()){ %>
+							<a href=<%= "DeleteAuction.jsp?aid="+aid%> class="button">Delete</a>
+						<% } %>
 						<p><small><%= color+" "+subcategory%></small></p>
 						<p><strong>$<%= Double.parseDouble(amount) %></strong></p>
 						<p>Category: <%= category.toUpperCase() %></p>
@@ -120,11 +124,11 @@
 						<p>Size: <%= size %></p>
 						<p>Color: <%= color %></p>
 						
-						<% if(session.getAttribute("user")==null || 
+						<% if(session.getAttribute("user")!=null && 
 								!username.equals(session.getAttribute("user").toString())){ %>
 							<a href=<%= "makeBid.jsp?aid="+aid%> class="button">Bid</a>
-							<a href=<%= "bidHistory.jsp?aid="+aid%> class="button">Bid History</a>
 						<% } %>
+							<a href=<%= "bidHistory.jsp?aid="+aid%> class="button">Bid History</a>
 							<a href=<%= "\"searchResults.jsp?search="+similarSearch+"&recency=lastmonth\""%> class="button">View Similar</a>
 						
 					</div>

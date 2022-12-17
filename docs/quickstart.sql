@@ -138,11 +138,11 @@ CREATE TABLE `BuyMe`.`Bids` (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE `BuyMe`.`WatchesAuction` (
+CREATE TABLE `BuyMe`.`BidHistory` (
 	`username` VARCHAR(255),
 	`aid` INT,
-	`maxoffer` DOUBLE NULL,
-	`isenabled` BOOLEAN,
+	`offer` DOUBLE NULL,
+    `date` DATETIME NOT NULL,
 	PRIMARY KEY (`username`, `aid`),
 	CONSTRAINT `w_username`
 		FOREIGN KEY (`username`)
