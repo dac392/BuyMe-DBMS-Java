@@ -88,7 +88,7 @@ public class Utility{
 			} else {
 				query += " AND ";
 			}
-			query += "s.posttime > '"+rs.getString("prevcheck")+"'";
+			query += "s.username <> '"+username+"'AND s.posttime > '"+rs.getString("prevcheck")+"'";
 			queryQueue.add(query);
 			
 			String update = "UPDATE Alerts a SET a.prevcheck = ? WHERE a.alid = ?";
