@@ -177,13 +177,22 @@ public class Utility{
 		for (int i = 0; i < query.length(); i++){
 			if (!Character.isWhitespace(query.charAt(i))){
 				String term = "";
-				while (i < query.length() && !Character.isWhitespace(query.charAt(i))){
-					term = term.concat(Character.toString(query.charAt(i)));
+				char delim = '\0';
+				while (i < query.length() && (!Character.isWhitespace(query.charAt(i)) || delim != '\0')){
+					if (query.charAt(i) == '\'' && delim == '\0') {
+						delim = query.charAt(i);
+					} else if (delim == query.charAt(i)) {
+						delim = '\0';
+					} else {
+						term = term.concat(Character.toString(query.charAt(i)));
+					}
 					i++;
 				}
 				termlist.add(term);
 			}
 		}
+		
+		System.out.println(termlist);
 		
 		String table = "Sellsproduct s";
 		String conditions = "";
