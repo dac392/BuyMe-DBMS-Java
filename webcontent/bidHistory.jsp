@@ -16,7 +16,7 @@
 		Connection con = db.getConnection();
 	    Statement st = con.createStatement();
 	    ResultSet rs = st.executeQuery("SELECT * FROM BidHistory b WHERE b.aid="+aid+
-	    		" ORDER BY b.date DESC, b.offer DESC");
+	    		" ORDER BY b.offer DESC, b.date DESC");
 	    
 	    String userid = (String)session.getAttribute("user");	
 		Boolean isstaff = (Boolean)session.getAttribute("user-isstaff");
