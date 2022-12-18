@@ -86,7 +86,15 @@
 				
 				break;
 			}
-		
+			
+			String biggest_bidder = "Base Value";
+			
+			rs = st.executeQuery("SELECT b.username AS user, b.offer AS offer FROM Bidhistory b WHERE b.aid="+aid+" AND"+
+				" b.offer = (SELECT max(b.offer) FROM BidHistory b WHERE b.aid="+aid+");");
+			if (rs.next() && rs.getFloat("offer") == Float.parseFloat(amount)){
+				biggest_bidder = rs.getString("user");
+			}
+			
 		%>
 			<div class="listing-container">
 				<fieldset>
@@ -114,7 +122,7 @@
 							<a href=<%= "DeleteAuction.jsp?aid="+aid%> class="button">Delete</a>
 						<% } %>
 						<p><small><%= color+" "+subcategory%></small></p>
-						<p><strong>$<%= Double.parseDouble(amount) %></strong></p>
+						<p><strong>$<%= Double.parseDouble(amount) %></strong> <small><%= biggest_bidder %></small></p>
 						<p>Category: <%= category.toUpperCase() %></p>
 						<p>Seller: <%= username %></p>
 						<br>

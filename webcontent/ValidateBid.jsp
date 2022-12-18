@@ -23,7 +23,8 @@
 		String option = request.getParameter("type"); 
 		String aid = request.getParameter("aid");
 		
- 		if(ceiling.isBlank()){
+ 		
+		if(ceiling.isBlank()){
 			if(option.equals("static")){
 				ceiling=floor;
 			}
@@ -36,6 +37,18 @@
 		//Create a SQL statement
 		Statement stmt = con.createStatement();
 	
+		//check auction
+		String str = "SELECT * FROM Sellsproduct a WHERE a.aid = "+aid+" AND a.amount + a.bidincrement <= "+ceiling;
+			
+		//Run the query against the database.
+		System.out.println(str);
+		ResultSet result = stmt.executeQuery(str);
+		if (!result.next()){
+			out.println("Bid Invalid");	
+			return;
+		}
+		
+		
 		//Make an insert statement for the Users table:
 		String insert = "INSERT INTO Bids(aid, username, floor, ceiling, type, date)"+ "VALUES (?,?,?,?,?,?);";
 		
@@ -51,6 +64,25 @@
 		ps.setString(5, option);
 		ps.setString(6, date);
 
+		ps.executeUpdate();
+		
+		insert = "INSERT INTO Bidhistory(aid, username, offer, date)"+ "VALUES (?,?,?,?);";
+		ps = con.prepareStatement(insert);
+		
+		ps.setString(1, aid);
+		ps.setString(2, user);
+		ps.setString(3, floor);
+		ps.setString(4, date);
+		
+		ps.executeUpdate();
+		
+		
+		insert = "UPDATE Sellsproduct a SET a.amount = ? WHERE a.aid = ?;";
+		ps = con.prepareStatement(insert);
+		
+		ps.setFloat(1, Float.parseFloat(floor));
+		ps.setInt(2, Integer.parseInt(aid));
+		
 		ps.executeUpdate();
 		
 		

@@ -143,7 +143,7 @@ CREATE TABLE `BuyMe`.`BidHistory` (
 	`aid` INT,
 	`offer` DOUBLE NULL,
     `date` DATETIME NOT NULL,
-	PRIMARY KEY (`username`, `aid`),
+	PRIMARY KEY (`username`, `aid`, `offer`),
 	CONSTRAINT `w_username`
 		FOREIGN KEY (`username`)
 		REFERENCES `BuyMe`.`Enduser`(`username`)
