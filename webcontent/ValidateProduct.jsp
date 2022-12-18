@@ -96,7 +96,7 @@
 		ps.setString(7, category);
 		ps.setString(8, color);
 		ps.setString(9, link);
-		ps.setString(10, amount+"");
+		ps.setString(11, amount+"");
 		
 		Calendar calendar = Calendar.getInstance();
 	    Timestamp timeStampObj = new java.sql.Timestamp(calendar.getTime().getTime());

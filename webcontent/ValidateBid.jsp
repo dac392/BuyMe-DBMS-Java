@@ -45,7 +45,8 @@
 		Statement stmt = con.createStatement();
 	
 		//check auction
-		String str = "SELECT * FROM Sellsproduct a WHERE a.aid = "+aid+" AND a.amount + a.bidincrement <= "+ceiling;
+		String str = "SELECT * FROM Sellsproduct a WHERE a.aid = "+aid+
+						" AND a.isopen = true AND a.amount + a.bidincrement <= "+ceiling;
 			
 		//Run the query against the database.
 		System.out.println(str);
