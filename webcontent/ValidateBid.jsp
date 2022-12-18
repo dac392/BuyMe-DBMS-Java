@@ -23,9 +23,16 @@
 		String option = request.getParameter("type"); 
 		String aid = request.getParameter("aid");
 		
+		if (aid == null){
+			response.sendRedirect("index.jsp");
+		}
+		if (option == null){
+			response.sendRedirect("makeBid.jsp?aid="+aid);
+		}
+		
  		
 		if(ceiling.isBlank()){
-			if(option.equals("static")){
+			if(!option.equals("auto")){
 				ceiling=floor;
 			}
 		}
@@ -44,7 +51,8 @@
 		System.out.println(str);
 		ResultSet result = stmt.executeQuery(str);
 		if (!result.next()){
-			out.println("Bid Invalid");	
+			out.println("Bid Invalid: Try bidding higher<br/>");	
+			out.println("<a href='makeBid.jsp?aid="+aid+"'>return</a>");	
 			return;
 		}
 		
