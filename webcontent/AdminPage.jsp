@@ -39,25 +39,25 @@
 	Database db = new Database();	
 	Connection con = db.getConnection();
     Statement st = con.createStatement();
-    ResultSet rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice");
+    ResultSet rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount > s.initial AND s.amount >= s.minimumprice");
     if(rs.next()){
     	out.println("<tr><td>Total Earnings: $"+rs.getFloat("total")+"</td>");
     	out.println("<td>Average Earnings Per Sell: $"+rs.getFloat("avg")+"</td></tr>");
     }
     
-    rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.category = \'tops\'");
+    rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial AND s.category = \'tops\'");
     if(rs.next()){
     	out.println("<tr><td>Total Earnings For Tops: $"+rs.getFloat("total")+"</td>");
     	out.println("<td>Average Earnings Per Tops: $"+rs.getFloat("avg")+"</td></tr>");
     }
     
-    rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.category = \'bottoms\'");
+    rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial AND s.category = \'bottoms\'");
     if(rs.next()){
     	out.println("<tr><td>Total Earnings For Bottoms: $"+rs.getFloat("total")+"</td>");
     	out.println("<td>Average Earnings Per Bottoms: $"+rs.getFloat("avg")+"</td></tr>");
     }
     
-    rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.category = \'shoes\'");
+    rs = st.executeQuery("SELECT sum(s.amount) AS total, avg(s.amount) AS avg FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial AND s.category = \'shoes\'");
     if(rs.next()){
     	out.println("<tr><td>Total Earnings For Shoes: $"+rs.getFloat("total")+"</td>");
     	out.println("<td>Average Earnings Per Shoes: $"+rs.getFloat("avg")+"</td></tr>");
@@ -88,7 +88,7 @@
 			} else {
 				query += " AND ";
 			}
-			query += " s.isopen = FALSE AND s.amount >= s.minimumprice AND s.category = \'shoes\'";
+			query += " s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial AND s.category = \'shoes\'";
 			
 			rs = st.executeQuery(query);
 			
@@ -102,7 +102,7 @@
 	</table>
 	<h3>Best Selling Items</h3>
 	<%
-	rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice ORDER BY s.amount DESC LIMIT 20");
+	rs = st.executeQuery("SELECT * FROM Sellsproduct s WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial ORDER BY s.amount DESC LIMIT 20");
     while(rs.next()){
     	out.println("<a href=ProductListing.jsp?aid="+rs.getInt("aid")+">"+rs.getString("auctionname")+"</a>: $"+rs.getFloat("amount")+"<br/>");
     }
@@ -112,7 +112,7 @@
 	<%
 	rs = st.executeQuery("SELECT e.username AS uname, sum(b.floor) AS spendings "+
 						"FROM Enduser e JOIN Bids b USING(username) JOIN Sellsproduct s USING(aid) "+
-						"WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND b.floor = s.amount "+
+						"WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial AND b.floor = s.amount "+
 						"GROUP BY uname");
     while(rs.next()){
     	out.println("<a href=UserHistory.jsp?user="+rs.getString("uname")+">"+rs.getString("uname")+"</a>: $"+
