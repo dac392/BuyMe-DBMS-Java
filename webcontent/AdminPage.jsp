@@ -88,7 +88,7 @@
 			} else {
 				query += " AND ";
 			}
-			query += " s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial AND s.category = \'shoes\'";
+			query += " s.isopen = FALSE AND s.amount >= s.minimumprice AND s.amount > s.initial ";
 			
 			rs = st.executeQuery(query);
 			
