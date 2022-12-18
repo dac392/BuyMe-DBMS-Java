@@ -194,7 +194,7 @@
 			while (result.next()){
 				if (result.getDouble("bid") < final_amount){
 					Utility.sendNotif(result.getString("user"),
-							"You have been outbid by "+final_user+"in an auction! Check the auction <a href='ProductListing.jsp?aid="+
+							"You have been outbid by "+final_user+" in an auction! Check the auction <a href='ProductListing.jsp?aid="+
 							aid+"'>here.</a>"
 							, con);
 				}
