@@ -27,6 +27,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `category` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,
   `link` VARCHAR(255) NULL,
+  `initial` DOUBLE NULL,
   PRIMARY KEY (`aid`),
   INDEX `username_idx` (`username` ASC) VISIBLE,
   CONSTRAINT `sp_username`
