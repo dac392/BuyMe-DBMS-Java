@@ -57,6 +57,7 @@
 			return;
 		}
 		
+		float increment = result.getFloat("bidincrement");//to be used for autobids
 		
 		result = stmt.executeQuery("SELECT * FROM Bids b WHERE b.aid = "+aid+" AND b.username = '"+user+"'");
 		boolean update_bid = result.next();
@@ -95,7 +96,16 @@
 			ps.executeUpdate();
 		}
 		
+		//get prev leader
+		str = "SELECT b.username AS user, b.offer AS bid FROM Bidhistory b WHERE b.aid = "+aid+
+			" ORDER BY offer LIMIT 1";
+		result = stmt.executeQuery(str);
+		String prev_leader = "";
+		if (result.next()){
+			prev_leader = result.getString("user");
+		}
 		
+		//Add actual bid log
 		
 		String insert = "INSERT INTO Bidhistory(aid, username, offer, date)"+ "VALUES (?,?,?,?);";
 		ps = con.prepareStatement(insert);
@@ -112,10 +122,59 @@
 		//auto updates
 		
 		float final_amount = Float.parseFloat(floor);
+		String final_user = user;
 		
-		
-		String activeAutoBidQuery = "SELECT * FROM Bids b WHERE ";
-		
+		boolean loopflag = false;
+		do{
+
+			System.out.println("loop");
+			loopflag = false;
+			String activeAutoBidQuery = "SELECT * FROM Bids b WHERE b.type='auto' AND b.floor < b.ceiling AND b.aid = "+aid+"";
+			result = stmt.executeQuery(activeAutoBidQuery);
+			while (result.next()){
+				if (final_user.equals(result.getString("username"))){
+					continue;
+				}
+				System.out.println(result.getString("username"));
+				
+				loopflag = true;
+				
+				boolean isOutbid = true;
+				if (final_amount + increment < result.getFloat("ceiling")){
+					isOutbid = false;
+					insert = "INSERT INTO Bidhistory(aid, username, offer, date)"+ " VALUES (?,?,?,?);";
+					ps = con.prepareStatement(insert);
+					
+					ps.setString(1, aid);
+					ps.setString(2, result.getString("username"));
+					ps.setString(3, final_amount + increment+"");
+					ps.setString(4, date);
+					
+					System.out.println(ps);
+					
+					ps.executeUpdate();
+					final_user = result.getString("username");
+					final_amount += increment;
+					
+				}
+				String update = "UPDATE Bids b SET b.floor = ? WHERE b.aid = ? AND b.username = ?";
+				ps = con.prepareStatement(update);
+				if (isOutbid){
+					ps.setString(1, result.getFloat("ceiling")+"");
+				} else {
+					ps.setString(1, final_amount+"");
+				}
+				ps.setString(2, aid);
+				ps.setString(3, result.getString("username"));
+				
+				System.out.println(ps);
+				
+				ps.executeUpdate();
+				
+			}
+			
+			
+		} while (loopflag);
 		
 		//FINAL: update Auction itself
 		
@@ -128,15 +187,17 @@
 		ps.executeUpdate();
 		
 		//Notify All others
-		str = "SELECT b.username AS user, max(b.offer) AS bid FROM Bidhistory b WHERE b.aid = "+aid+
-			" GROUP BY user";
-		result = stmt.executeQuery(str);
-		while (result.next()){
-			if (result.getDouble("bid") < final_amount){
-				Utility.sendNotif(result.getString("user"),
-						"You have been outbid in an auction! Check the auction <a href='ProductListing.jsp?aid="+
-						aid+"'>here.</a>"
-						, con);
+		if (!prev_leader.equals(user)){
+			str = "SELECT b.username AS user, max(b.offer) AS bid FROM Bidhistory b WHERE b.aid = "+aid+
+				" GROUP BY user";
+			result = stmt.executeQuery(str);
+			while (result.next()){
+				if (result.getDouble("bid") < final_amount){
+					Utility.sendNotif(result.getString("user"),
+							"You have been outbid by "+final_user+"in an auction! Check the auction <a href='ProductListing.jsp?aid="+
+							aid+"'>here.</a>"
+							, con);
+				}
 			}
 		}
 		
