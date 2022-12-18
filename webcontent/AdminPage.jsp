@@ -112,7 +112,7 @@
 	<%
 	rs = st.executeQuery("SELECT e.username AS uname, sum(b.floor) AS spendings "+
 						"FROM Enduser e JOIN Bids b USING(username) JOIN Sellsproduct s USING(aid) "+
-						"WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND b.floor = s.amount"+
+						"WHERE s.isopen = FALSE AND s.amount >= s.minimumprice AND b.floor = s.amount "+
 						"GROUP BY uname");
     while(rs.next()){
     	out.println("<a href=UserHistory.jsp?user="+rs.getString("uname")+">"+rs.getString("uname")+"</a>: $"+
