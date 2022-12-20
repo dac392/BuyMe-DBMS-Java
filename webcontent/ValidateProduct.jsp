@@ -80,7 +80,7 @@
 		
 		
 		//Make an insert statement for the Users table:
-		String insert = "INSERT INTO Sellsproduct(aid, isopen, auctionname, username, minimumprice, amount, bidincrement, deadline, category, color, link, posttime)"+ "VALUES (null,true,?,?,?,?,?,?,?,?,?,?)";
+		String insert = "INSERT INTO Sellsproduct(aid, isopen, auctionname, username, minimumprice, amount, bidincrement, deadline, category, color, link, posttime, initial)"+ "VALUES (null,true,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = con.prepareStatement(insert);
@@ -96,6 +96,7 @@
 		ps.setString(7, category);
 		ps.setString(8, color);
 		ps.setString(9, link);
+		ps.setString(11, amount+"");
 		
 		Calendar calendar = Calendar.getInstance();
 	    Timestamp timeStampObj = new java.sql.Timestamp(calendar.getTime().getTime());

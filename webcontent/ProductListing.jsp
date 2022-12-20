@@ -33,6 +33,9 @@
 			String deadline = rs.getString("deadline");
 			String color = rs.getString("color");
 			
+			double minprice = rs.getDouble("minimumprice");
+			boolean isopen = rs.getBoolean("isopen");
+			
 			String subcategory = "Object";
 			String size = "N/A";
 			ResultSet subset;
@@ -86,7 +89,18 @@
 				
 				break;
 			}
-		
+			
+			String biggest_bidder = "Base Value";
+			
+			rs = st.executeQuery("SELECT b.username AS user, b.offer AS offer FROM Bidhistory b WHERE b.aid="+aid+" AND"+
+				" b.offer = (SELECT max(b.offer) FROM BidHistory b WHERE b.aid="+aid+");");
+			if (rs.next() && rs.getFloat("offer") == Float.parseFloat(amount)){
+				biggest_bidder = rs.getString("user");
+			}
+			if (!isopen && ((Double.parseDouble(amount) < minprice) || biggest_bidder.equals("Base Value"))){
+				biggest_bidder = "No Sell";
+			}
+			
 		%>
 			<div class="listing-container">
 				<fieldset>
@@ -114,7 +128,7 @@
 							<a href=<%= "DeleteAuction.jsp?aid="+aid%> class="button">Delete</a>
 						<% } %>
 						<p><small><%= color+" "+subcategory%></small></p>
-						<p><strong>$<%= Double.parseDouble(amount) %></strong></p>
+						<p><strong>$<%= Double.parseDouble(amount) %></strong> <small><%= biggest_bidder %></small></p>
 						<p>Category: <%= category.toUpperCase() %></p>
 						<p>Seller: <%= username %></p>
 						<br>
@@ -124,7 +138,7 @@
 						<p>Size: <%= size %></p>
 						<p>Color: <%= color %></p>
 						
-						<% if(session.getAttribute("user")!=null && 
+						<% if(isopen && session.getAttribute("user")!=null && 
 								!username.equals(session.getAttribute("user").toString())){ %>
 							<a href=<%= "makeBid.jsp?aid="+aid%> class="button">Bid</a>
 						<% } %>

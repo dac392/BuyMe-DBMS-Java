@@ -66,6 +66,52 @@ public class Utility{
 		return "?";
 	}
 	
+	public static void updateAuctions() throws SQLException  {
+		
+		Calendar calendar = Calendar.getInstance();
+	    Timestamp timeStampObj = new java.sql.Timestamp(calendar.getTime().getTime());
+		
+		String querry = "SELECT * FROM Sellsproduct a WHERE a.isopen = true "+
+					"AND a.deadline <= '"+timeStampObj.toString()+"'";
+		System.out.println(querry);
+		Database db = new Database();	
+		Connection con = db.getConnection();
+		Statement st = con.createStatement();
+		
+		ResultSet rs = st.executeQuery(querry);
+		
+		ArrayList<Integer> endedAuctions = new ArrayList<Integer>();
+		
+		while (rs.next()) {
+			String update = "UPDATE Sellsproduct a SET a.isopen = false WHERE a.aid = ?";
+			
+			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
+			PreparedStatement ps = con.prepareStatement(update);
+			ps.setInt(1, rs.getInt("aid"));
+			
+			Integer entry = rs.getInt("aid");
+			
+			if (rs.getDouble("amount") >= Double.max(rs.getDouble("minimumprice"), rs.getDouble("initial"))) {
+				endedAuctions.add(entry);
+			}
+			
+			
+			ps.executeUpdate();
+		}
+		for (int entry : endedAuctions) {
+			System.out.println(entry+"lol");
+			rs = st.executeQuery("SELECT b.username AS user FROM Bidhistory b WHERE b.aid = "+entry+
+								" ORDER BY b.offer DESC LIMIT 1");
+			if (rs.next()) {
+				sendNotif(rs.getString("user"), "You've won an auction! See <a href='ProductListing.jsp?aid="+
+						entry+"'>Here</a>", con);
+			}
+			
+		}
+		
+		con.close();
+	}
+	
 	public static void checkAlerts(String username) throws SQLException  {
 		String querry = "SELECT * FROM Alerts a WHERE a.username = '"+username+"'";
 		
@@ -121,6 +167,7 @@ public class Utility{
 				seenBefore.add(id);
 			}
 		}
+		con.close();
 	}
 	
 	public static String[] searchQuery(String query) {
@@ -130,13 +177,22 @@ public class Utility{
 		for (int i = 0; i < query.length(); i++){
 			if (!Character.isWhitespace(query.charAt(i))){
 				String term = "";
-				while (i < query.length() && !Character.isWhitespace(query.charAt(i))){
-					term = term.concat(Character.toString(query.charAt(i)));
+				char delim = '\0';
+				while (i < query.length() && (!Character.isWhitespace(query.charAt(i)) || delim != '\0')){
+					if (query.charAt(i) == '\'' && delim == '\0') {
+						delim = query.charAt(i);
+					} else if (delim == query.charAt(i)) {
+						delim = '\0';
+					} else {
+						term = term.concat(Character.toString(query.charAt(i)));
+					}
 					i++;
 				}
 				termlist.add(term);
 			}
 		}
+		
+		System.out.println(termlist);
 		
 		String table = "Sellsproduct s";
 		String conditions = "";

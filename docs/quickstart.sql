@@ -27,6 +27,7 @@ CREATE TABLE `BuyMe`.`Sellsproduct` (
   `category` VARCHAR(255) NULL,
   `color` VARCHAR(255) NULL,
   `link` VARCHAR(255) NULL,
+  `initial` DOUBLE NULL,
   PRIMARY KEY (`aid`),
   INDEX `username_idx` (`username` ASC) VISIBLE,
   CONSTRAINT `sp_username`
@@ -143,7 +144,7 @@ CREATE TABLE `BuyMe`.`BidHistory` (
 	`aid` INT,
 	`offer` DOUBLE NULL,
     `date` DATETIME NOT NULL,
-	PRIMARY KEY (`username`, `aid`),
+	PRIMARY KEY (`username`, `aid`, `offer`),
 	CONSTRAINT `w_username`
 		FOREIGN KEY (`username`)
 		REFERENCES `BuyMe`.`Enduser`(`username`)

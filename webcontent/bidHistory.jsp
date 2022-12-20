@@ -15,27 +15,33 @@
 		Database db = new Database();	
 		Connection con = db.getConnection();
 	    Statement st = con.createStatement();
-	    ResultSet rs = st.executeQuery("SELECT * FROM Bids b WHERE b.aid="+aid+";");
+	    ResultSet rs = st.executeQuery("SELECT * FROM BidHistory b WHERE b.aid="+aid+
+	    		" ORDER BY b.offer DESC, b.date DESC");
+	    
+	    String userid = (String)session.getAttribute("user");	
+		Boolean isstaff = (Boolean)session.getAttribute("user-isstaff");
 	%>
 		<table>
 		<tr>
-			<td>aid</td>
 			<td>username</td>
-			<td>floor</td>
-			<td>ceiling</td>
-			<td>type</td>
+			<td>offer</td>
 			<td>date</td>
+			<% 
+			if (isstaff != null && isstaff.booleanValue() == true) {
+				out.println("<td></td>");
+			}%>
 		</tr>
 		
 		<%while(rs.next()){%>
 			<tr>
-				<td><%= rs.getString("aid") %></td>
-				<td><%= rs.getString("username") %></td>
-				<td><%= rs.getString("floor") %></td>
-				<td><%= rs.getString("ceiling") %></td>
-				<td><%= rs.getString("type") %></td>
+				<td><a href='UserHistory.jsp?user=<%= rs.getString("username")%>'><%= rs.getString("username") %></a></td>
+				<td>$<%= rs.getString("offer") %></td>
 				<td><%= rs.getString("date") %></td>
-				<td>
+				<% 
+				if (isstaff != null && isstaff.booleanValue() == true) {
+					out.println("<td><a href='RemoveUserFromAuction.jsp?aid="+rs.getInt("aid")+
+					"&user="+rs.getString("username")+"'>Delete</a></td>");
+				}%>
 			</tr>
 			
 		<%

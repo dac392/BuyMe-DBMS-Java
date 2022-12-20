@@ -20,7 +20,7 @@
 	     	<ul class="navbar-nav">
 	     	<% 
 	     		Utility.checkAlerts((String)session.getAttribute("user"));
-	     	
+	     		Utility.updateAuctions();
 	     	
 	     		Object header_isadmin = session.getAttribute("user-isadmin");
 	     		if (header_isadmin != null && ((Boolean)header_isadmin).booleanValue()){ %>
