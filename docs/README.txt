@@ -1,3 +1,13 @@
+
+Admin Credentials:
+
+	Username: Admin
+	Password: 
+
+(there is no password)
+
+---------------------------
+
 A thing about the search query system, used in both the browsing system and the alerts system. (Also applies to that query on the Admin page)
 
 To use it, create "terms" akin to the examples given below.
