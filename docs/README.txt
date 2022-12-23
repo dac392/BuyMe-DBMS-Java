@@ -8,13 +8,14 @@ Admin Credentials:
 
 Default Customer Representative Credentials:
 
-	Username: Customer Rep
+	Username: Customer_Rep
 	Password: password
 
 ---------------------------
 
-When using Ecipse, one may have to add /webcontent the Deployment Assembly in order for the program to work. (This is after defining the project as a Web Java Project via the project's Properties.)
+DO NOT put whitespace into one's usernames. It breaks the system.
 
+When using Ecipse, one may have to add /webcontent the Deployment Assembly in order for the program to work. (This is after defining the project as a Web Java Project via the project's Properties.)
 
 Note that src/main/java/com/buyme/Database.java is where the SQL connector is made, and includes a preset username and password respectively on line 33. Change this to fit your local system's context instead.
 
@@ -39,7 +40,7 @@ There's also comparison operators (=, >, <, >=, <=), which can also be used. Not
 	seller=Jose
 	size>=M
  
-Due to taking things and putting them straight into SQL without second thought, it is strongly advised not to add ANY quotes whatsoever into most text fields. However, spaces are supported, but require you to surround the relevant area with single quotes in filter queries. See below:
+Due to taking things and putting them straight into SQL without second thought, it is strongly advised not to add ANY quotes whatsoever into most text fields. However, spaces are sometimes supported, but require you to surround the relevant area with single quotes in filter queries. See below:
 
 	seller='Jack Saul'
 

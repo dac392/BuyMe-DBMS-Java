@@ -13,7 +13,7 @@ CREATE TABLE `Enduser` (
 
 INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative) VALUES
 	("Admin", "Admin", "admin@buyme.com", "", true, true),
-	("Customer Rep", "Customer Rep", "rep@buyme.com", "password", true, false);
+	("Customer Rep", "Customer_Rep", "rep@buyme.com", "password", true, false);
 	
 
 CREATE TABLE `BuyMe`.`Sellsproduct` (

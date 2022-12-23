@@ -27,9 +27,9 @@
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
 		
-			String str = "SELECT * FROM Sellsproduct a WHERE a.username = \'"+user
-					+"\' OR EXISTS(SELECT * FROM Bids b WHERE b.aid = a.aid AND b.username = \'"+user
-					+"\') ORDER BY a.posttime DESC";
+			String str = "SELECT * FROM Sellsproduct a WHERE a.username = \""+user
+					+"\" OR EXISTS(SELECT * FROM Bids b WHERE b.aid = a.aid AND b.username = \""+user
+					+"\") ORDER BY a.posttime DESC";
 			
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
