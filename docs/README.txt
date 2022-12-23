@@ -8,6 +8,11 @@ Admin Credentials:
 
 ---------------------------
 
+Note that src/main/java/com/buyme/Database.java is where the SQL connector is made, and includes a preset username and password respectively on line 33. Change this to fit your local system's context instead.
+
+
+---------------------------
+
 A thing about the search query system, used in both the browsing system and the alerts system. (Also applies to that query on the Admin page)
 
 To use it, create "terms" akin to the examples given below.
