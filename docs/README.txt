@@ -13,7 +13,7 @@ Default Customer Representative Credentials:
 
 ---------------------------
 
-DO NOT put whitespace into one's usernames. It breaks the system.
+DO NOT put either whitespace, quotes, or underscores into one's usernames. It breaks the system.
 
 When using Ecipse, one may have to add /webcontent the Deployment Assembly in order for the program to work. (This is after defining the project as a Web Java Project via the project's Properties.)
 
