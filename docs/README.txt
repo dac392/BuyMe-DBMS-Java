@@ -13,8 +13,10 @@ Default Customer Representative Credentials:
 
 ---------------------------
 
-Note that src/main/java/com/buyme/Database.java is where the SQL connector is made, and includes a preset username and password respectively on line 33. Change this to fit your local system's context instead.
+When using Ecipse, one may have to add /webcontent the Deployment Assembly in order for the program to work. (This is after defining the project as a Web Java Project via the project's Properties.)
 
+
+Note that src/main/java/com/buyme/Database.java is where the SQL connector is made, and includes a preset username and password respectively on line 33. Change this to fit your local system's context instead.
 
 ---------------------------
 
