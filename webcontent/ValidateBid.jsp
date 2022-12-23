@@ -98,7 +98,7 @@
 		
 		//get prev leader
 		str = "SELECT b.username AS user, b.offer AS bid FROM Bidhistory b WHERE b.aid = "+aid+
-			" ORDER BY offer LIMIT 1";
+			" ORDER BY offer DESC LIMIT 1";
 		result = stmt.executeQuery(str);
 		String prev_leader = "";
 		if (result.next()){
