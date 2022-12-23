@@ -187,7 +187,7 @@
 		ps.executeUpdate();
 		
 		//Notify All others
-		if (!prev_leader.equals(user)){
+		if (!prev_leader.equals(final_user)){
 			str = "SELECT b.username AS user, max(b.offer) AS bid FROM Bidhistory b WHERE b.aid = "+aid+
 				" GROUP BY user";
 			result = stmt.executeQuery(str);
