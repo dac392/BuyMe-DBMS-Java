@@ -6,6 +6,11 @@ Admin Credentials:
 
 (there is no password)
 
+Default Customer Representative Credentials:
+
+	Username: Customer Rep
+	Password: password
+
 ---------------------------
 
 Note that src/main/java/com/buyme/Database.java is where the SQL connector is made, and includes a preset username and password respectively on line 33. Change this to fit your local system's context instead.
