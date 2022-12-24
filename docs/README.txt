@@ -8,7 +8,7 @@ Admin Credentials:
 
 Default Customer Representative Credentials:
 
-	Username: Customer_Rep
+	Username: CustomerRep
 	Password: password
 
 ---------------------------
