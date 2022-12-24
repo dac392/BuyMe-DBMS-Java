@@ -12,7 +12,9 @@ CREATE TABLE `Enduser` (
 );
 
 INSERT INTO Enduser(name, username, email, password, isstaff, isadministrative) VALUES
-	("Admin", "Admin", "admin@buyme.com", "", true, true);
+	("Admin", "Admin", "admin@buyme.com", "", true, true),
+	("Customer Rep", "CustomerRep", "rep@buyme.com", "password", true, false);
+	
 
 CREATE TABLE `BuyMe`.`Sellsproduct` (
   `aid` INT NOT NULL AUTO_INCREMENT,
@@ -140,9 +142,9 @@ CREATE TABLE `BuyMe`.`Bids` (
 );
 
 CREATE TABLE `BuyMe`.`BidHistory` (
-	`username` VARCHAR(255),
-	`aid` INT,
-	`offer` DOUBLE NULL,
+	`username` VARCHAR(255) NOT NULL,
+	`aid` INT NOT NULL,
+	`offer` DOUBLE NOT NULL,
     `date` DATETIME NOT NULL,
 	PRIMARY KEY (`username`, `aid`, `offer`),
 	CONSTRAINT `w_username`
